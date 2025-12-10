@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="A single-playthrough, Hardcore-compatible Fallout: New Vegas walkthrough for a female Courier – all quests, DLC, achievements, locations, and maxed stats." />
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
+
     /* ============
        DESIGN TOKENS
        ============ */
@@ -61,10 +63,15 @@
       --radius-lg: 26px;
       --radius-xl: 32px;
 
+      --font-fallout: "Archivo Black", "Arial Black", Impact, var(--font-sans);
       --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", Roboto, sans-serif;
       --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
         Consolas, "Liberation Mono", "Courier New", monospace;
+
+      --kicker-color: #28c7ed;
+      --kicker-border: rgba(255, 255, 255, 0.6);
+      --kicker-glow: rgba(40, 199, 237, 0.4);
     }
 
     body.dark-theme {
@@ -112,6 +119,52 @@
       --text-muted: #cbd5f5;
       --text-faint: #9ca3af;
       --text-on-accent: #eff6ff;
+
+      --kicker-color: #75f3ff;
+      --kicker-border: rgba(117, 243, 255, 0.3);
+      --kicker-glow: rgba(117, 243, 255, 0.4);
+    }
+
+    body[data-glass="frosted"] {
+      --panel-strong-bg: linear-gradient(
+        155deg,
+        rgba(255, 255, 255, 0.65),
+        rgba(230, 236, 255, 0.48)
+      );
+      --panel-soft-bg: linear-gradient(
+        150deg,
+        rgba(255, 255, 255, 0.62),
+        rgba(236, 243, 255, 0.55)
+      );
+      --hero-bg: linear-gradient(155deg, rgba(255, 255, 255, 0.78), rgba(245, 247, 255, 0.82));
+      --aside-bg: linear-gradient(150deg, rgba(255, 255, 255, 0.74), rgba(247, 249, 255, 0.82));
+      --glass-blur-strong: 16px;
+      --glass-blur-soft: 14px;
+      --glass-saturation: 1.05;
+      --glass-soft-saturation: 1;
+      --shadow-soft: 0 18px 36px rgba(15, 23, 42, 0.16);
+      --shadow-subtle: 0 10px 26px rgba(15, 23, 42, 0.12);
+    }
+
+    body.dark-theme[data-glass="frosted"] {
+      --panel-strong-bg: linear-gradient(
+        150deg,
+        rgba(12, 17, 29, 0.96),
+        rgba(12, 17, 29, 0.86)
+      );
+      --panel-soft-bg: linear-gradient(
+        150deg,
+        rgba(12, 17, 29, 0.9),
+        rgba(14, 21, 35, 0.82)
+      );
+      --hero-bg: linear-gradient(155deg, rgba(11, 17, 33, 0.94), rgba(7, 11, 22, 0.88));
+      --aside-bg: linear-gradient(150deg, rgba(12, 17, 29, 0.9), rgba(10, 16, 27, 0.86));
+      --glass-blur-strong: 18px;
+      --glass-blur-soft: 16px;
+      --glass-saturation: 1.1;
+      --glass-soft-saturation: 1.05;
+      --shadow-soft: 0 20px 34px rgba(0, 0, 0, 0.74);
+      --shadow-subtle: 0 12px 28px rgba(0, 0, 0, 0.6);
     }
 
     body[data-glass="frosted"] {
@@ -326,11 +379,35 @@
     }
 
     .hero-kicker {
-      font-size: 0.78rem;
-      letter-spacing: 0.22em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      font-family: var(--font-fallout);
+      font-size: 0.9rem;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--accent-2);
-      margin-bottom: 4px;
+      color: var(--kicker-color);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0));
+      border: 1px solid var(--kicker-border);
+      border-radius: 999px;
+      box-shadow:
+        0 10px 24px rgba(15, 23, 42, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.06),
+        0 0 18px var(--kicker-glow);
+      backdrop-filter: blur(6px) saturate(1.4);
+      -webkit-backdrop-filter: blur(6px) saturate(1.4);
+      margin-bottom: 8px;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-kicker::before {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--kicker-color));
+      opacity: 0.9;
     }
 
     .hero-title {
