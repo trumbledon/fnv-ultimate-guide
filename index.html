@@ -4,115 +4,259 @@
   <meta charset="UTF-8" />
   <title>Fallout: New Vegas – Ultimate One-Run Completionist Guide</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A single-playthrough, Hardcore-compatible Fallout: New Vegas walkthrough for a female Courier – all quests, DLC, achievements, locations, and maxed stats." />
   <style>
+    /* ============
+       DESIGN TOKENS
+       ============ */
     :root {
-      --bg: #05030b;
-      --bg-elevated: rgba(12, 10, 24, 0.96);
-      --bg-elevated-soft: rgba(20, 18, 40, 0.9);
-      --accent: #ffd85b;
-      --accent-soft: rgba(255, 216, 91, 0.12);
-      --accent-strong: #ffbf00;
-      --accent-2: #4dd0ff;
-      --accent-2-soft: rgba(77, 208, 255, 0.12);
-      --border-subtle: rgba(255, 255, 255, 0.06);
-      --text-main: #f5f5ff;
-      --text-muted: #a7abc9;
-      --text-faint: #787c9a;
-      --danger: #ff6b6b;
-      --card-radius: 18px;
-      --card-radius-lg: 26px;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.6);
-      --shadow-subtle: 0 8px 24px rgba(0, 0, 0, 0.35);
+      /* Light (default) palette – liquid glass */
+      --bg-base: #ced8f0;
+      --bg-alt: #dce3f7;
+      --bg-gradient: radial-gradient(circle at 0% 0%, #f5f7ff 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, #dae7ff 0, transparent 55%),
+        radial-gradient(circle at 50% 100%, #b5c6f7 0, transparent 60%),
+        linear-gradient(180deg, #d4def6, #ecf1ff);
+      --glass-bg: rgba(255, 255, 255, 0.78);
+      --glass-bg-soft: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.9);
+      --glass-border-subtle: rgba(128, 146, 196, 0.35);
+      --glass-highlight: rgba(255, 255, 255, 0.9);
+      --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.2);
+      --shadow-subtle: 0 14px 40px rgba(15, 23, 42, 0.14);
+
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.08);
+      --accent-strong: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --accent-2-soft: rgba(14, 165, 233, 0.10);
+      --danger: #ef4444;
+
+      --text-main: #0f172a;
+      --text-muted: #4b5563;
+      --text-faint: #6b7280;
+      --text-on-accent: #eff6ff;
+
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --radius-xl: 32px;
+
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", Roboto, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+        Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
     body.dark-theme {
-      --bg: #05030b;
-      --bg-elevated: rgba(7, 5, 18, 0.98);
-      --bg-elevated-soft: rgba(14, 12, 30, 0.95);
-      --text-main: #f9f8ff;
-      --text-muted: #b9bdd9;
+      --bg-base: #020617;
+      --bg-alt: #020617;
+      --bg-gradient: radial-gradient(circle at 0% 0%, #0b1120 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, #020617 0, transparent 55%),
+        radial-gradient(circle at 50% 100%, #111827 0, transparent 65%),
+        linear-gradient(180deg, #020617, #020617);
+      --glass-bg: rgba(15, 23, 42, 0.85);
+      --glass-bg-soft: rgba(15, 23, 42, 0.92);
+      --glass-border: rgba(148, 163, 184, 0.8);
+      --glass-border-subtle: rgba(30, 64, 175, 0.55);
+      --glass-highlight: rgba(248, 250, 252, 0.08);
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.9);
+      --shadow-subtle: 0 18px 40px rgba(15, 23, 42, 0.9);
+
+      --accent: #60a5fa;
+      --accent-soft: rgba(96, 165, 250, 0.12);
+      --accent-strong: #3b82f6;
+      --accent-2: #22c1c3;
+      --accent-2-soft: rgba(45, 212, 191, 0.16);
+
+      --text-main: #e5e7eb;
+      --text-muted: #cbd5f5;
+      --text-faint: #9ca3af;
+      --text-on-accent: #eff6ff;
     }
 
-    * {
+    /* ============
+       GLOBAL RESET
+       ============ */
+
+    *, *::before, *::after {
       box-sizing: border-box;
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background:
-        radial-gradient(circle at 0% 0%, #33234d 0, transparent 55%),
-        radial-gradient(circle at 100% 0%, #423a77 0, transparent 55%),
-        radial-gradient(circle at 50% 90%, #332f4f 0, transparent 60%),
-        var(--bg);
-      color: var(--text-main);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, sans-serif;
-      line-height: 1.6;
+    html {
       scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      position: relative;
     }
 
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background-image: linear-gradient(
-        135deg,
-        rgba(255, 216, 91, 0.12),
-        transparent 40%,
-        rgba(77, 208, 255, 0.12),
-        transparent 70%
-      );
-      mix-blend-mode: soft-light;
-      opacity: 0.7;
       pointer-events: none;
+      background-image:
+        radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.55) 0, transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(255, 255, 255, 0.35) 0, transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(221, 230, 255, 0.65) 0, transparent 55%);
+      mix-blend-mode: soft-light;
+      opacity: 0.9;
       z-index: -2;
     }
 
+    /* subtle fine-grain texture */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(148, 163, 184, 0.22) 1px, transparent 0);
+      background-size: 130px 130px;
+      opacity: 0.25;
+      mix-blend-mode: soft-light;
+      z-index: -1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+
+    /* ============
+       PAGE LAYOUT
+       ============ */
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 12px;
+      background: var(--accent);
+      color: var(--text-on-accent);
+      padding: 8px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      z-index: 100;
+      transition: top 0.15s ease-out, box-shadow 0.15s ease-out;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.4);
+    }
+
+    .skip-link:focus-visible {
+      top: 12px;
+      outline: none;
+    }
+
     .page {
-      max-width: 1200px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 20px 16px 80px;
+      padding: 20px 14px 80px;
     }
 
     @media (min-width: 900px) {
       .page {
-        padding: 32px 24px 96px;
+        padding: 28px 24px 96px;
       }
     }
+
+    .glass {
+      background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.88),
+        var(--glass-bg)
+      );
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(24px) saturate(1.35);
+      -webkit-backdrop-filter: blur(24px) saturate(1.35);
+    }
+
+    .glass-soft {
+      background: linear-gradient(
+        150deg,
+        rgba(255, 255, 255, 0.82),
+        var(--glass-bg-soft)
+      );
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-subtle);
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    }
+
+    body.dark-theme .glass,
+    body.dark-theme .glass-soft {
+      background: linear-gradient(
+        150deg,
+        rgba(15, 23, 42, 0.9),
+        var(--glass-bg-soft)
+      );
+    }
+
+    /* ============
+       HERO
+       ============ */
 
     header.hero {
       position: relative;
       margin-bottom: 28px;
-      padding: 24px 18px 22px;
-      background: radial-gradient(circle at 0 0, #ffd85b22 0, transparent 55%),
-        radial-gradient(circle at 100% 0, #4dd0ff22 0, transparent 45%),
-        linear-gradient(
-          145deg,
-          rgba(7, 5, 18, 0.96),
-          rgba(15, 13, 32, 0.98)
-        );
-      border-radius: var(--card-radius-lg);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 22px 18px 18px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--glass-border);
       box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(28px) saturate(1.4);
+      -webkit-backdrop-filter: blur(28px) saturate(1.4);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(239, 246, 255, 0.9) 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(219, 234, 254, 0.85) 0, transparent 55%),
+        linear-gradient(155deg, rgba(255, 255, 255, 0.9), rgba(235, 244, 255, 0.9));
       overflow: hidden;
     }
 
-    @media (min-width: 900px) {
-      header.hero {
-        padding: 26px 28px 22px;
-        margin-bottom: 32px;
-      }
+    body.dark-theme header.hero {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(30, 64, 175, 0.6) 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(8, 47, 73, 0.7) 0, transparent 55%),
+        linear-gradient(155deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
+    }
+
+    header.hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.85) 0, transparent 52%),
+        radial-gradient(circle at 90% 110%, rgba(209, 213, 219, 0.65) 0, transparent 55%);
+      opacity: 0.7;
+      mix-blend-mode: screen;
     }
 
     .hero-inner {
+      position: relative;
+      z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.1fr);
       gap: 18px;
       align-items: center;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .hero-inner {
         grid-template-columns: 1fr;
       }
@@ -120,32 +264,31 @@
 
     .hero-kicker {
       font-size: 0.78rem;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent-2);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .hero-title {
-      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      font-size: clamp(1.9rem, 3.2vw, 2.5rem);
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
       margin: 0 0 6px;
-      text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
     }
 
     .hero-subtitle {
       font-size: 0.96rem;
       color: var(--text-muted);
-      max-width: 32rem;
-      margin: 0 0 16px;
+      max-width: 34rem;
+      margin: 0 0 14px;
     }
 
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .pill {
@@ -153,15 +296,20 @@
       align-items: center;
       gap: 6px;
       padding: 5px 10px;
-      font-size: 0.75rem;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(248, 250, 252, 0.9);
+      font-size: 0.78rem;
       color: var(--text-muted);
     }
 
+    body.dark-theme .pill {
+      background: rgba(15, 23, 42, 0.85);
+      border-color: rgba(148, 163, 184, 0.5);
+    }
+
     .pill span.icon {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
 
     .hero-actions {
@@ -182,73 +330,62 @@
       font-weight: 600;
       border: none;
       cursor: pointer;
-      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out,
-        background 0.15s ease-out, border 0.15s ease-out;
       text-decoration: none;
       white-space: nowrap;
+      transition: transform 0.1s ease-out, box-shadow 0.12s ease-out,
+        background 0.15s ease-out, color 0.15s ease-out;
     }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: #211605;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
+      color: var(--text-on-accent);
+      box-shadow: 0 12px 26px rgba(37, 99, 235, 0.45);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.65);
-      background: linear-gradient(
-        135deg,
-        var(--accent-strong),
-        #ffe38b
-      );
+      box-shadow: 0 18px 34px rgba(37, 99, 235, 0.55);
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
     }
 
     .btn-ghost {
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(255, 255, 255, 0.62);
       color: var(--text-muted);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    body.dark-theme .btn-ghost {
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+      border-color: rgba(148, 163, 184, 0.6);
     }
 
     .btn-ghost:hover {
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-main);
       transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-main);
     }
 
     .hero-aside {
-      position: relative;
       padding: 14px 14px 12px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      background: radial-gradient(circle at 0 0, #ffd85b1f 0, transparent 50%),
-        radial-gradient(circle at 100% 0, #4dd0ff24 0, transparent 55%),
-        linear-gradient(
-          150deg,
-          rgba(8, 6, 18, 0.9),
-          rgba(20, 18, 40, 0.98)
-        );
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
       box-shadow: var(--shadow-subtle);
+      backdrop-filter: blur(26px) saturate(1.35);
+      -webkit-backdrop-filter: blur(26px) saturate(1.35);
+      background:
+        radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.2) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(14, 165, 233, 0.18) 0, transparent 55%),
+        linear-gradient(150deg, rgba(255, 255, 255, 0.9), rgba(241, 245, 249, 0.95));
+      position: relative;
       overflow: hidden;
     }
 
-    .hero-aside::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(
-          circle at 18% 0%,
-          rgba(255, 216, 91, 0.18),
-          transparent 55%
-        ),
-        radial-gradient(
-          circle at 80% 85%,
-          rgba(77, 208, 255, 0.14),
-          transparent 55%
-        );
-      mix-blend-mode: screen;
-      opacity: 0.9;
-      pointer-events: none;
+    body.dark-theme .hero-aside {
+      background:
+        radial-gradient(circle at 0 0, rgba(37, 99, 235, 0.32) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.22) 0, transparent 55%),
+        linear-gradient(150deg, rgba(15, 23, 42, 0.97), rgba(15, 23, 42, 0.97));
     }
 
     .hero-aside-inner {
@@ -260,24 +397,24 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: var(--accent-2);
     }
 
     .hero-card-title {
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       margin: 0 0 8px;
     }
 
     .hero-aside ul {
       list-style: none;
-      padding: 0;
       margin: 0 0 10px;
+      padding: 0;
       font-size: 0.8rem;
       color: var(--text-muted);
     }
 
-    .hero-aside ul li {
+    .hero-aside li {
       margin-bottom: 4px;
       display: flex;
       align-items: center;
@@ -285,12 +422,13 @@
     }
 
     .hero-aside code {
-      font-size: 0.78rem;
-      padding: 3px 7px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 2px 6px;
       border-radius: 999px;
-      background: rgba(0, 0, 0, 0.4);
-      color: var(--accent);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(15, 23, 42, 0.06);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--accent-strong);
     }
 
     .hero-aside-footer {
@@ -299,33 +437,41 @@
       align-items: baseline;
       font-size: 0.75rem;
       color: var(--text-faint);
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding-top: 6px;
       margin-top: 4px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
     }
 
     .theme-toggle {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 8px;
+      padding: 4px 9px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(255, 255, 255, 0.5);
       color: var(--text-muted);
       font-size: 0.78rem;
       cursor: pointer;
-      transition: background 0.15s ease-out, transform 0.1s ease-out;
+      transition: background 0.12s ease-out, transform 0.08s ease-out;
+    }
+
+    body.dark-theme .theme-toggle {
+      background: rgba(15, 23, 42, 0.96);
     }
 
     .theme-toggle:hover {
-      background: rgba(0, 0, 0, 0.8);
       transform: translateY(-0.5px);
+      background: rgba(255, 255, 255, 0.85);
     }
+
+    /* ============
+       LAYOUT BODY
+       ============ */
 
     .layout {
       display: grid;
-      grid-template-columns: 280px minmax(0, 1fr);
+      grid-template-columns: 270px minmax(0, 1fr);
       gap: 18px;
       align-items: flex-start;
     }
@@ -336,26 +482,39 @@
       }
     }
 
-    .sidebar {
+    nav.sidebar {
       position: sticky;
-      top: 20px;
+      top: 18px;
       padding: 13px 14px 14px;
-      background: var(--bg-elevated);
-      border-radius: var(--card-radius);
-      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
       box-shadow: var(--shadow-subtle);
-      backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border-subtle);
+      background: linear-gradient(
+        150deg,
+        rgba(255, 255, 255, 0.9),
+        var(--glass-bg-soft)
+      );
+      backdrop-filter: blur(22px) saturate(1.3);
+      -webkit-backdrop-filter: blur(22px) saturate(1.3);
+    }
+
+    body.dark-theme nav.sidebar {
+      background: linear-gradient(
+        150deg,
+        rgba(15, 23, 42, 0.94),
+        rgba(15, 23, 42, 0.95)
+      );
     }
 
     .sidebar-title {
       font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.22em;
       color: var(--text-faint);
       margin: 0 0 8px;
     }
 
-    .sidebar small {
+    nav.sidebar small {
       display: block;
       font-size: 0.73rem;
       color: var(--text-faint);
@@ -364,8 +523,8 @@
 
     .toc {
       list-style: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
       font-size: 0.84rem;
     }
 
@@ -376,32 +535,36 @@
     .toc a {
       display: block;
       padding: 5px 7px;
-      border-radius: 9px;
+      border-radius: 10px;
       text-decoration: none;
       color: var(--text-muted);
       border: 1px solid transparent;
-      transition: background 0.15s ease-out, color 0.15s ease-out,
-        border-color 0.15s ease-out, transform 0.08s ease-out;
+      transition: background 0.14s ease-out, border-color 0.14s ease-out,
+        color 0.14s ease-out, transform 0.08s ease-out;
     }
 
     .toc a:hover {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.7);
+      border-color: rgba(148, 163, 184, 0.6);
       color: var(--text-main);
-      border-color: rgba(255, 255, 255, 0.06);
       transform: translateX(1px);
+    }
+
+    body.dark-theme .toc a:hover {
+      background: rgba(15, 23, 42, 0.9);
     }
 
     .toc a.active {
       background: var(--accent-soft);
+      border-color: rgba(37, 99, 235, 0.8);
       color: var(--accent-strong);
-      border-color: rgba(255, 216, 91, 0.6);
     }
 
     .toc-nested {
       list-style: none;
       margin: 2px 0 4px 10px;
       padding-left: 4px;
-      border-left: 1px dashed rgba(255, 255, 255, 0.08);
+      border-left: 1px dashed rgba(148, 163, 184, 0.5);
     }
 
     .toc-nested li a {
@@ -411,35 +574,55 @@
 
     main.content {
       padding: 12px;
-      border-radius: var(--card-radius-lg);
-      background: var(--bg-elevated-soft);
-      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
       box-shadow: var(--shadow-subtle);
-      backdrop-filter: blur(22px);
+      border: 1px solid var(--glass-border-subtle);
+      background: linear-gradient(
+        170deg,
+        rgba(255, 255, 255, 0.96),
+        rgba(245, 248, 255, 0.98)
+      );
+      backdrop-filter: blur(28px) saturate(1.4);
+      -webkit-backdrop-filter: blur(28px) saturate(1.4);
     }
 
-    @media (max-width: 768px) {
-      main.content {
-        padding: 10px;
-      }
+    body.dark-theme main.content {
+      background: linear-gradient(
+        170deg,
+        rgba(15, 23, 42, 0.98),
+        rgba(15, 23, 42, 0.97)
+      );
     }
+
+    /* ============
+       SECTIONS
+       ============ */
 
     .section-card {
       margin-bottom: 18px;
       padding: 18px 16px 16px;
-      border-radius: 16px;
-      background: radial-gradient(circle at 0 0, #ffffff10 0, transparent 45%),
-        linear-gradient(
-          160deg,
-          rgba(9, 8, 22, 0.98),
-          rgba(16, 15, 32, 0.96)
-        );
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: linear-gradient(
+        160deg,
+        rgba(255, 255, 255, 0.92),
+        rgba(245, 248, 255, 0.96)
+      );
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12);
+    }
+
+    body.dark-theme .section-card {
+      background: linear-gradient(
+        160deg,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.985)
+      );
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.8);
     }
 
     .section-card.accent {
-      border-color: rgba(255, 216, 91, 0.35);
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.75);
+      border-color: rgba(37, 99, 235, 0.65);
+      box-shadow: 0 18px 45px rgba(37, 99, 235, 0.25);
     }
 
     .section-header {
@@ -452,7 +635,7 @@
     }
 
     .section-header h2 {
-      font-size: 1.1rem;
+      font-size: 1.08rem;
       margin: 0;
       letter-spacing: 0.03em;
       text-transform: uppercase;
@@ -481,69 +664,13 @@
 
     ul, ol {
       margin: 0 0 6px 1.1em;
-      padding-left: 0.3em;
+      padding-left: 0.4em;
     }
 
     li {
       margin-bottom: 3px;
       font-size: 0.9rem;
       color: var(--text-muted);
-    }
-
-    .note,
-    .warning,
-    .tip {
-      position: relative;
-      margin: 7px 0 8px;
-      padding: 8px 9px 7px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      font-size: 0.82rem;
-    }
-
-    .note {
-      background: var(--accent-2-soft);
-      border-color: rgba(77, 208, 255, 0.5);
-    }
-
-    .warning {
-      background: rgba(255, 107, 107, 0.08);
-      border-color: rgba(255, 107, 107, 0.7);
-      color: #ffdede;
-    }
-
-    .tip {
-      background: var(--accent-soft);
-      border-color: rgba(255, 216, 91, 0.6);
-    }
-
-    .note strong,
-    .warning strong,
-    .tip strong {
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 1px;
-      opacity: 0.85;
-    }
-
-    .inline-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 1px 6px 1px 5px;
-      border-radius: 999px;
-      font-size: 0.73rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(0, 0, 0, 0.45);
-      color: var(--text-faint);
-    }
-
-    .inline-tag span.icon {
-      font-size: 0.9rem;
     }
 
     .checklist {
@@ -566,23 +693,74 @@
       color: var(--accent);
     }
 
+    .note,
+    .warning,
+    .tip,
+    .callout-achievement {
+      position: relative;
+      margin: 7px 0 8px;
+      padding: 8px 9px 7px;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.82rem;
+    }
+
+    .note {
+      background: var(--accent-2-soft);
+    }
+
+    .warning {
+      background: rgba(239, 68, 68, 0.06);
+      border-color: rgba(239, 68, 68, 0.8);
+      color: var(--text-main);
+    }
+
+    body.dark-theme .warning {
+      color: #fee2e2;
+    }
+
+    .tip {
+      background: var(--accent-soft);
+      border-color: rgba(37, 99, 235, 0.7);
+    }
+
+    .callout-achievement {
+      background: rgba(234, 179, 8, 0.12);
+      border-color: rgba(202, 138, 4, 0.8);
+    }
+
+    .note strong,
+    .warning strong,
+    .tip strong,
+    .callout-achievement strong {
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1px;
+      opacity: 0.8;
+    }
+
     code.inline {
-      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
-        Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-family: var(--font-mono);
       font-size: 0.8rem;
-      padding: 2px 5px;
+      padding: 1px 5px;
       border-radius: 6px;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      color: var(--accent-2);
+      background: rgba(15, 23, 42, 0.05);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--accent-strong);
     }
 
     details {
       margin: 6px 0 4px;
       padding: 5px 6px;
-      background: rgba(0, 0, 0, 0.45);
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    body.dark-theme details {
+      background: rgba(15, 23, 42, 0.96);
     }
 
     details summary {
@@ -595,12 +773,16 @@
       gap: 6px;
     }
 
-    details summary::-webkit-details-marker {
-      display: none;
+    details[open] {
+      background: rgba(255, 255, 255, 0.9);
     }
 
-    details[open] {
-      background: rgba(0, 0, 0, 0.7);
+    body.dark-theme details[open] {
+      background: rgba(15, 23, 42, 0.98);
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
     }
 
     .summary-dot {
@@ -610,17 +792,67 @@
       background: var(--accent);
     }
 
+    footer {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--text-faint);
+      text-align: right;
+    }
+
+    /* ============
+       TABLES
+       ============ */
+
+    .snowglobe-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 6px 0 8px;
+      font-size: 0.86rem;
+    }
+
+    .snowglobe-table thead th {
+      font-weight: 600;
+      color: var(--text-main);
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(148, 163, 184, 0.15);
+      text-align: left;
+      vertical-align: bottom;
+    }
+
+    body.dark-theme .snowglobe-table thead th {
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .snowglobe-table tbody td {
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.5);
+      vertical-align: top;
+      color: var(--text-muted);
+    }
+
+    .snowglobe-table tbody tr:nth-child(even) {
+      background: rgba(148, 163, 184, 0.08);
+    }
+
+    body.dark-theme .snowglobe-table tbody tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    /* ============
+       BACK TO TOP
+       ============ */
+
     #backToTop {
       position: fixed;
       bottom: 18px;
       right: 16px;
       z-index: 50;
-      border: none;
       border-radius: 999px;
       padding: 7px 11px;
-      background: rgba(4, 2, 12, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(248, 250, 252, 0.95);
       color: var(--text-muted);
-      border: 1px solid rgba(255, 255, 255, 0.18);
       font-size: 0.8rem;
       display: flex;
       align-items: center;
@@ -631,7 +863,12 @@
       transform: translateY(8px);
       transition: opacity 0.15s ease-out, transform 0.15s ease-out,
         background 0.15s ease-out;
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(18px) saturate(1.2);
+      -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    }
+
+    body.dark-theme #backToTop {
+      background: rgba(15, 23, 42, 0.96);
     }
 
     #backToTop.visible {
@@ -641,20 +878,88 @@
     }
 
     #backToTop:hover {
-      background: rgba(12, 10, 30, 0.96);
+      background: rgba(255, 255, 255, 0.98);
     }
 
-    footer {
-      margin-top: 12px;
-      font-size: 0.8rem;
-      color: var(--text-faint);
-      text-align: right;
+    #backToTop:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* ============
+       RESPONSIVE
+       ============ */
+
+    @media (max-width: 768px) {
+      main.content {
+        padding: 10px;
+      }
+
+      header.hero {
+        padding: 18px 14px 14px;
+      }
+    }
+
+    /* ============
+       PRINT STYLES
+       ============ */
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+
+      body::before,
+      body::after {
+        display: none !important;
+      }
+
+      .page {
+        max-width: 100%;
+        padding: 0.5cm 1cm 1cm;
+      }
+
+      header.hero,
+      main.content,
+      .section-card {
+        box-shadow: none !important;
+        background: #ffffff !important;
+        border-radius: 0 !important;
+        border: 1px solid #e5e7eb;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+
+      nav.sidebar,
+      #backToTop,
+      .btn,
+      .theme-toggle {
+        display: none !important;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      a {
+        color: #000000 !important;
+        text-decoration: underline;
+      }
+
+      .pill {
+        border: none;
+        background: none;
+        padding: 0;
+      }
     }
   </style>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
   <div class="page">
-    <header class="hero">
+    <header class="hero" aria-label="Fallout New Vegas Ultimate Guide introduction">
       <div class="hero-inner">
         <div>
           <div class="hero-kicker">Fallout: New Vegas</div>
@@ -676,11 +981,11 @@
             </span>
             <span class="pill">
               <span class="icon">📍</span>
-              All Quests & Locations
+              All Quests &amp; Locations
             </span>
             <span class="pill">
               <span class="icon">🧠</span>
-              Max Skills & SPECIAL
+              Max Skills &amp; SPECIAL
             </span>
           </div>
 
@@ -696,21 +1001,19 @@
           </div>
         </div>
 
-        <aside class="hero-aside">
+        <aside class="hero-aside" aria-label="Guide usage notes">
           <div class="hero-aside-inner">
             <div class="hero-tagline">Field Notes</div>
-            <h2 class="hero-card-title">How to use this guide while playing</h2>
+            <h2 class="hero-card-title">How to use this guide as you play</h2>
             <ul>
               <li>Follow sections in order for a smooth, immersive route.</li>
-              <li>Whenever you see a location name, mark it on your in-game map.</li>
-              <li>
-                Use <code>☐</code> checklists as you clear areas or quests.
-              </li>
-              <li>Save before big choices; many endings can be sampled via reloads.</li>
+              <li>Use the region checklists as a quick &quot;did I miss anything?&quot; pass.</li>
+              <li>Look for <code>☐</code> markers to tick off key steps mentally.</li>
+              <li>Save before big choices and faction-defining decisions.</li>
             </ul>
             <div class="hero-aside-footer">
-              <span>Written for a female Courier.</span>
-              <button class="theme-toggle" id="themeToggle" type="button">
+              <span>Written with a female Courier in mind.</span>
+              <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme">
                 <span class="icon">🌗</span>
                 <span>Toggle theme</span>
               </button>
@@ -721,7 +1024,7 @@
     </header>
 
     <div class="layout">
-      <aside class="sidebar" aria-label="Table of contents">
+      <nav class="sidebar" aria-label="Guide sections">
         <h2 class="sidebar-title">Route Overview</h2>
         <small>Click any section to jump there. The highlight follows your scroll.</small>
         <ol class="toc" id="toc">
@@ -735,43 +1038,21 @@
               <li><a href="#section-goodsprings-battle">Town Defense Choice</a></li>
             </ol>
           </li>
-          <li>
-            <a href="#section-primm">4. Primm &amp; NCRCF Loop</a>
-          </li>
-          <li>
-            <a href="#section-novacreppconn">5. Nipton, Novac &amp; Repconn</a>
-          </li>
-          <li>
-            <a href="#section-vegas-approach">6. Approach to New Vegas</a>
-          </li>
-          <li>
-            <a href="#section-strip">7. The Strip &amp; Snow Globes</a>
-          </li>
-          <li>
-            <a href="#section-regions">8. Region Sweeps</a>
-          </li>
-          <li>
-            <a href="#section-companions">9. Companions &amp; Unmarked Quests</a>
-          </li>
-          <li>
-            <a href="#section-skills">10. Maxing Skills &amp; SPECIAL</a>
-          </li>
-          <li>
-            <a href="#section-dlcs">11. DLC Order &amp; Notes</a>
-          </li>
-          <li>
-            <a href="#section-gra">12. Gun Runners&apos; Arsenal</a>
-          </li>
-          <li>
-            <a href="#section-final">13. Final Battle &amp; Endings</a>
-          </li>
-          <li>
-            <a href="#section-immersion">14. Immersive Play Tips</a>
-          </li>
+          <li><a href="#section-primm">4. Primm &amp; NCRCF Loop</a></li>
+          <li><a href="#section-novacreppconn">5. Nipton, Novac &amp; Repconn</a></li>
+          <li><a href="#section-vegas-approach">6. Approach to New Vegas</a></li>
+          <li><a href="#section-strip">7. The Strip &amp; Snow Globes</a></li>
+          <li><a href="#section-regions">8. Region Sweeps</a></li>
+          <li><a href="#section-companions">9. Companions &amp; Unmarked Quests</a></li>
+          <li><a href="#section-skills">10. Maxing Skills &amp; SPECIAL</a></li>
+          <li><a href="#section-dlcs">11. DLC Order &amp; Notes</a></li>
+          <li><a href="#section-gra">12. Gun Runners&apos; Arsenal</a></li>
+          <li><a href="#section-final">13. Final Battle &amp; Endings</a></li>
+          <li><a href="#section-immersion">14. Immersive Play Tips</a></li>
         </ol>
-      </aside>
+      </nav>
 
-      <main class="content">
+      <main class="content" id="main">
         <!-- 1. MASTER PLAN -->
         <section id="section-plan" class="section-card accent">
           <div class="section-header">
@@ -785,19 +1066,27 @@
           </p>
           <ul class="checklist">
             <li>Experiences all main quests, side quests, and DLC questlines.</li>
-            <li>Triggers as many unmarked quests and personal stories as possible.</li>
+            <li>Triggers as many unmarked quests and companion arcs as possible.</li>
             <li>Discovers every location and collects all base-game snow globes.</li>
-            <li>Maxes all skills and pushes SPECIAL as high as the game reasonably allows.</li>
+            <li>Maxes all skills and pushes SPECIAL to the practical limit.</li>
             <li>Earns every achievement/trophy, including DLC and GRA, in one save.</li>
           </ul>
-          <p>
-            The walkthrough is written to be kept open while you play. It tells you
-            where to walk, who to talk to, and what to pick up, but avoids heavy plot spoilers.
-          </p>
+
+          <div class="callout-achievement">
+            <strong>Critical Missables – Quick View</strong>
+            <ul>
+              <li>Keep <em>Hardcore Mode ON</em> the entire run if you want the Hardcore achievement.</li>
+              <li>Do Powder Ganger/NCRCF quests early, before you fully commit to NCR.</li>
+              <li>Plan a &quot;master save&quot; right before the Hoover Dam finale for all faction endings.</li>
+              <li>Kill Mr. House with a golf club for an easy GRA challenge (if you don&apos;t side with him).</li>
+              <li>Clear ED-E logs and Lonesome Road warheads carefully; they&apos;re easy to miss in a rush.</li>
+            </ul>
+          </div>
+
           <div class="tip">
             <strong>Habit</strong>
-            Before you leave any hub (town, Vault, major base), do a slow sweep:
-            talk to every named NPC, check every terminal, and comb through shelves and desks for skill books and snow globes.
+            Before you leave any hub (town, Vault, NCR camp), do a slow sweep:
+            talk to every named NPC, read every terminal, and comb shelves and desks for skill books and snow globes.
           </div>
         </section>
 
@@ -808,14 +1097,22 @@
             <span class="section-subtitle">Building the perfect female Courier.</span>
           </div>
 
-          <h3>2.1. Difficulty &amp; Hardcore Mode</h3>
+          <h3>2.1. Quick New Game Checklist</h3>
+          <ul class="checklist">
+            <li>Turn <strong>Hardcore Mode</strong> ON when Doc asks.</li>
+            <li>Set SPECIAL to S5 P5 E7 C1 I9 A7 L6.</li>
+            <li>Pick the <strong>Good Natured</strong> and <strong>Small Frame</strong> traits.</li>
+            <li>Plan to take <strong>Educated</strong> at level 4 and <strong>Comprehension</strong> at level 6.</li>
+            <li>Save caps for an <strong>Intelligence implant</strong> as your first implant purchase.</li>
+          </ul>
+
+          <h3>2.2. Difficulty &amp; Hardcore Mode</h3>
           <p>
             When Doc Mitchell asks about Hardcore Mode, choose it <em>on</em> and keep it on
-            for the entire run. You can leave combat difficulty at Normal (or higher if you like),
-            but do not toggle Hardcore off if you want the related achievement.
+            for the entire run. Adjust combat difficulty (Normal or higher) to taste, but never toggle Hardcore off if you want that achievement locked in.
           </p>
 
-          <h3>2.2. Starting SPECIAL (Before Implants)</h3>
+          <h3>2.3. Starting SPECIAL (Before Implants)</h3>
           <p>Use this SPECIAL spread in Doc Mitchell&apos;s chair, before any implants:</p>
           <ul>
             <li><strong>Strength 5</strong> – Good enough for most weapons; later boosted by DLC perks.</li>
@@ -827,23 +1124,19 @@
             <li><strong>Luck 6</strong> – Boosts crit chance and skill points slightly; can be raised by implant.</li>
           </ul>
 
-          <h3>2.3. Traits for a One-Run Completionist</h3>
+          <h3>2.4. Traits for a One-Run Completionist</h3>
           <ul>
             <li>
-              <strong>Good Natured</strong> – More points into non-combat skills (Speech, Repair, etc.),
+              <strong>Good Natured</strong> – More points in non-combat skills like Speech, Repair, and Medicine,
               which you want for checks and crafting.
             </li>
             <li>
               <strong>Small Frame</strong> – +1 Agility at the cost of more fragile limbs.
-              You&apos;ll stock doctor&apos;s bags anyway, so this is manageable.
+              You&apos;ll carry doctor&apos;s bags anyway, so this is manageable.
             </li>
           </ul>
-          <p>
-            If your game version offers the <strong>Skilled</strong> trait, it&apos;s also excellent for
-            a long run: more skills in exchange for slightly slower leveling, which is no problem over 50 levels.
-          </p>
 
-          <h3>2.4. Early Perk Plan (Don&apos;t Improvise These)</h3>
+          <h3>2.5. Early Perk Plan (Don&apos;t Improvise These)</h3>
           <p>Grab these perks at the earliest opportunity:</p>
           <ul>
             <li>
@@ -851,11 +1144,12 @@
               options with several key men in the story.
             </li>
             <li>
-              <strong>Level 4: Educated</strong> – +2 skill points per level from now on. This is mandatory
+              <strong>Level 4: Educated</strong> – +2 skill points per level from now on. Mandatory
               for a max-skill run.
             </li>
             <li>
-              <strong>Level 6: Comprehension</strong> – Doubles the benefit of skill books and improves magazines.
+              <strong>Level 6: Comprehension</strong> – Doubles the benefit of skill books
+              and improves magazines.
             </li>
           </ul>
           <p>Other early perks to pick up soon after:</p>
@@ -870,7 +1164,7 @@
             </li>
           </ul>
 
-          <h3>2.5. Faction &amp; Ending Strategy</h3>
+          <h3>2.6. Faction &amp; Ending Strategy</h3>
           <p>
             The NCR, Mr. House, Caesar&apos;s Legion, and Yes Man endings are mutually exclusive <em>on a single branch</em>,
             but you can see them all from one save with careful timing:
@@ -885,11 +1179,12 @@
               <code class="inline">Pre-Hoover Dam – Final Choice</code>.
             </li>
             <li>
-              Finish the game with one faction, watch the ending, then reload that save and make a different choice.
+              Finish the game with one faction, watch the ending, then reload that save
+              and make a different choice for other endings.
             </li>
           </ul>
 
-          <h3>2.6. DLC Order for Story &amp; Difficulty</h3>
+          <h3>2.7. DLC Order for Story &amp; Difficulty</h3>
           <p>Play the four story DLCs in this order, after you&apos;re mid-level but before Hoover Dam:</p>
           <ol>
             <li><strong>Dead Money</strong></li>
@@ -910,20 +1205,29 @@
             <span class="section-subtitle">From Doc&apos;s house to your first snow globe.</span>
           </div>
 
+          <h3>3.0. Goodsprings Checklist</h3>
+          <ul class="checklist">
+            <li>Loot Doc Mitchell&apos;s house completely.</li>
+            <li>Complete Sunny&apos;s tutorial and gecko hunts.</li>
+            <li>Talk to Trudy, Chet, Easy Pete, and Joe Cobb.</li>
+            <li>Pick up the <strong>Goodsprings Snow Globe</strong> in the cemetery.</li>
+            <li>Side with <strong>Goodsprings</strong> in the town defense.</li>
+          </ul>
+
           <section id="section-doc-house">
             <h3>3.1. Doc Mitchell’s House – Wake-up Loot Route</h3>
             <p>
               You come to on Doc Mitchell&apos;s couch in Goodsprings. Once you finish character creation,
-              it&apos;s time to quietly strip his house of anything useful.
+              quietly strip his house of anything useful.
             </p>
             <ol>
               <li>
                 After you stand up, walk through the house and loot methodically:
                 <ul>
                   <li>
-                    <strong>Medical room</strong> (where you did the Special test): on shelves and counters,
-                    pick up every <strong>Stimpak</strong>, <strong>RadAway</strong>, <strong>Rad-X</strong>,
-                    <strong>Doctor&apos;s Bag</strong>, and <strong>Med-X</strong>.
+                    <strong>Medical room</strong> (where you did the SPECIAL test): on the metal tables
+                    and shelves you&apos;ll find <strong>Stimpaks</strong>, <strong>RadAway</strong>,
+                    <strong>Rad-X</strong>, a <strong>Doctor&apos;s Bag</strong> and <strong>Med-X</strong>.
                   </li>
                   <li>
                     <strong>Kitchen</strong>: take all food and drink you see – canned goods, clean water,
@@ -953,15 +1257,15 @@
           <section id="section-goodsprings-town">
             <h3>3.2. Goodsprings – First Steps into Town</h3>
             <p>
-              Step outside into the bright Mojave. Turn slightly right and check the mailbox near Doc&apos;s
-              house for any magazines. Then walk down the slope into town.
+              Step outside into the bright Mojave. Check the mailbox near Doc&apos;s
+              house for any magazines, then walk down the slope into town.
             </p>
             <h4>3.2.1. Meet the Locals in a Loop</h4>
             <ol>
               <li>
                 Walk toward the <strong>Prospector Saloon</strong>. Around the back you&apos;ll find
                 <strong>Sunny Smiles</strong> practicing with her dog.
-                Talk to her and agree to do the tutorial:
+                Talk to her and agree to the tutorial:
                 <ul>
                   <li>Target practice on bottles.</li>
                   <li>Clearing geckos at nearby wells.</li>
@@ -1075,6 +1379,7 @@
               After the shootout, sleep in one of the beds in the rock house opposite the saloon.
               Treat it as your Courier&apos;s last calm night before heading out alone into the Mojave.
             </div>
+          </section>
         </section>
 
         <!-- 4. PRIMM / NCRCF -->
@@ -1083,6 +1388,16 @@
             <h2>4. Primm, Mojave Outpost &amp; NCRCF Loop</h2>
             <span class="section-subtitle">First road trip and Powder Ganger web.</span>
           </div>
+
+          <h3>4.0. Primm &amp; NCRCF Checklist</h3>
+          <ul class="checklist">
+            <li>Clear the <strong>Bison Steve Hotel</strong>.</li>
+            <li>Talk to <strong>Johnson Nash</strong> about your attackers.</li>
+            <li>Explore <strong>Primm Slim</strong> sheriff options (don&apos;t lock in yet).</li>
+            <li>Visit <strong>Mojave Outpost</strong>, meet <strong>Cass</strong> and <strong>Ranger Jackson</strong>.</li>
+            <li>Complete Jackson&apos;s ant quest for early NCR faction rep.</li>
+            <li>Visit <strong>NCRCF</strong> and do Powder Ganger jobs before committing to NCR.</li>
+          </ul>
 
           <h3>4.1. Goodsprings → Primm</h3>
           <ol>
@@ -1222,6 +1537,15 @@
             <span class="section-subtitle">Companions, dark lotteries, and rockets.</span>
           </div>
 
+          <h3>5.0. Region Checklist</h3>
+          <ul class="checklist">
+            <li>Witness the Legion&apos;s &quot;lottery&quot; at <strong>Nipton</strong>.</li>
+            <li>Check <strong>Ranger Station Charlie</strong> on the way north.</li>
+            <li>In <strong>Novac</strong>, rent a motel room and complete Boone&apos;s quest.</li>
+            <li>Talk to <strong>Manny Vargas</strong> for main quest progression.</li>
+            <li>Complete <strong>Come Fly With Me</strong> at <strong>Repconn Test Site</strong>.</li>
+          </ul>
+
           <h3>5.1. Primm → Nipton</h3>
           <ol>
             <li>
@@ -1312,6 +1636,15 @@
             </li>
           </ol>
 
+          <details>
+            <summary><span class="summary-dot"></span> Spoiler-safe tip for Boone&apos;s quest</summary>
+            <p>
+              Make sure you&apos;ve found the actual physical evidence in Jeannie May&apos;s home
+              before you commit to anyone. Bringing the wrong person to the dinosaur will lock you into
+              an outcome you might not like.
+            </p>
+          </details>
+
           <h3>5.4. Novac – Manny &amp; Main Quest</h3>
           <p>
             Visit <strong>Manny Vargas</strong> (upstairs in the motel rooms) and talk about your attackers.
@@ -1364,6 +1697,15 @@
             <h2>6. Approach to New Vegas</h2>
             <span class="section-subtitle">188 Trading Post, implants &amp; Freeside.</span>
           </div>
+
+          <h3>6.0. Approach Checklist</h3>
+          <ul class="checklist">
+            <li>Visit <strong>188 Trading Post</strong> and meet <strong>Veronica</strong>.</li>
+            <li>Go to the <strong>New Vegas Medical Clinic</strong> and buy your first implants.</li>
+            <li>Enter <strong>Freeside</strong> and locate the <strong>Old Mormon Fort</strong>.</li>
+            <li>Pick up the <strong>Freeside snow globe</strong> at the Fort.</li>
+            <li>Meet the <strong>King</strong> and start <em>GI Blues</em>.</li>
+          </ul>
 
           <h3>6.1. Novac → 188 Trading Post</h3>
           <ol>
@@ -1451,6 +1793,15 @@
             <span class="section-subtitle">Vault 21, Lucky 38 &amp; factions.</span>
           </div>
 
+          <h3>7.0. Strip Checklist</h3>
+          <ul class="checklist">
+            <li>Enter the <strong>Strip</strong> through the main gate.</li>
+            <li>Visit <strong>Vault 21</strong> and grab its snow globe.</li>
+            <li>Accept the invitation to the <strong>Lucky 38</strong>.</li>
+            <li>Find the <strong>Lucky 38 snow globe</strong> in the cocktail lounge.</li>
+            <li>Meet Mr. House, the NCR ambassador, and Yes Man.</li>
+          </ul>
+
           <h3>7.1. Entering the Strip</h3>
           <ol>
             <li>
@@ -1488,7 +1839,6 @@
             <li>
               Look for the Securitron named <strong>Jane</strong> in the presidential suite.
               Speak with her about the snow globes and sell them to her for caps when you like.
-              She will display them in a case, but the achievement is already locked in when you collected them.
             </li>
           </ol>
 
@@ -1798,7 +2148,7 @@
             </li>
             <li>
               Finish <strong>Lonesome Road</strong> and choose the SPECIAL bonus option at the end,
-              adding +1 to the stat that best rounds out your build.
+              adding +1 to the stat that best balances your build.
             </li>
           </ul>
 
@@ -1812,6 +2162,66 @@
               <li>Lonesome Road SPECIAL bonus chosen.</li>
             </ul>
           </div>
+
+          <h3>10.4. Snow Globe Reference Table</h3>
+          <p>
+            Here&apos;s a quick reference for all base-game snow globes, where to grab them,
+            and when they naturally slot into this route:
+          </p>
+          <table class="snowglobe-table">
+            <thead>
+              <tr>
+                <th>Snow Globe</th>
+                <th>Area</th>
+                <th>Exact Spot</th>
+                <th>Suggested Timing</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Goodsprings</strong></td>
+                <td>Goodsprings Cemetery</td>
+                <td>On a small stone base near the cluster of fresh graves in the fenced cemetery.</td>
+                <td>During <strong>3.3</strong>, before you leave Goodsprings for Primm.</td>
+              </tr>
+              <tr>
+                <td><strong>Freeside</strong></td>
+                <td>Old Mormon Fort</td>
+                <td>On the central counter inside the main medical tent/building at the Fort.</td>
+                <td>During <strong>6.3</strong>, on your first real visit to help the Followers.</td>
+              </tr>
+              <tr>
+                <td><strong>Strip (Vault 21)</strong></td>
+                <td>The Strip – Vault 21 Hotel</td>
+                <td>On the reception desk directly ahead as you enter Vault 21 from the Strip.</td>
+                <td>During <strong>7.2</strong>, soon after you first reach the Strip.</td>
+              </tr>
+              <tr>
+                <td><strong>Lucky 38</strong></td>
+                <td>The Strip – Lucky 38</td>
+                <td>On the bar counter in the cocktail lounge floor of the Lucky 38.</td>
+                <td>During <strong>7.3</strong>, after your first meeting with Mr. House.</td>
+              </tr>
+              <tr>
+                <td><strong>Nellis</strong></td>
+                <td>Nellis AFB</td>
+                <td>Inside the Boomer Museum, sitting on a counter among the displays.</td>
+                <td>During <strong>8.3</strong>, while working through the Boomers&apos; quest line.</td>
+              </tr>
+              <tr>
+                <td><strong>Jacobstown</strong></td>
+                <td>Jacobstown</td>
+                <td>On the front desk in the lodge lobby, near the entrance.</td>
+                <td>Also during <strong>8.3</strong>, when you first arrive in Jacobstown.</td>
+              </tr>
+              <tr>
+                <td><strong>Hoover Dam</strong></td>
+                <td>Hoover Dam Visitor Center</td>
+                <td>On a desk in the visitor center reception area, near the front of the building.</td>
+                <td>During <strong>8.4</strong>, on your first proper NCR/main-story visit to the Dam.</td>
+              </tr>
+            </tbody>
+          </table>
         </section>
 
         <!-- 11. DLCS -->
@@ -1830,7 +2240,7 @@
           <ul>
             <li>
               <strong>How to start:</strong> Listen to the <strong>Sierra Madre broadcast</strong>
-              which appears near the <strong>Mojave Drive-In</strong> in the south-east desert.
+              which appears near the <strong>Mojave Drive-In</strong>.
             </li>
             <li>
               The DLC strips you of your gear when you arrive, so:
@@ -1856,8 +2266,7 @@
           <h3>11.2. Honest Hearts – Zion</h3>
           <ul>
             <li>
-              <strong>How to start:</strong> Travel to the <strong>Northern Passage</strong> north of New Vegas
-              and speak with the caravan there.
+              <strong>How to start:</strong> Travel to the <strong>Northern Passage</strong> and speak with the caravan.
             </li>
             <li>
               Once in Zion, clear every side canyon and cave:
@@ -2122,8 +2531,8 @@
         </section>
 
         <footer>
-          Use this page as your wasteland field manual: follow the route, mark off checklists, and
-          let your Courier make the final calls when choices appear.
+          Use this page as your wasteland field manual: follow the route, mark off checklists,
+          and let your Courier make the final calls when choices appear.
         </footer>
       </main>
     </div>
@@ -2136,12 +2545,12 @@
 
   <script>
     (function () {
-      // Smooth scrolling for internal links
+      // Smooth scrolling for internal links (respecting anchors)
       document.addEventListener("click", function (e) {
         const target = e.target.closest('a[href^="#"]');
         if (!target) return;
         const href = target.getAttribute("href");
-        if (href === "#" || href.length === 1) return;
+        if (!href || href === "#") return;
         const el = document.querySelector(href);
         if (el) {
           e.preventDefault();
@@ -2212,7 +2621,6 @@
         }
       }
 
-      // Init theme from localStorage / media query
       let savedTheme = localStorage.getItem(storageKey);
       if (!savedTheme) {
         savedTheme = window.matchMedia &&
