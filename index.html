@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fallout: New Vegas – Ultimate One-Run Completionist Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #05030b;
+      --bg-elevated: rgba(12, 10, 24, 0.96);
+      --bg-elevated-soft: rgba(20, 18, 40, 0.9);
+      --accent: #ffd85b;
+      --accent-soft: rgba(255, 216, 91, 0.12);
+      --accent-strong: #ffbf00;
+      --accent-2: #4dd0ff;
+      --accent-2-soft: rgba(77, 208, 255, 0.12);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --text-main: #f5f5ff;
+      --text-muted: #a7abc9;
+      --text-faint: #787c9a;
+      --danger: #ff6b6b;
+      --card-radius: 18px;
+      --card-radius-lg: 26px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.6);
+      --shadow-subtle: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    body.dark-theme {
+      --bg: #05030b;
+      --bg-elevated: rgba(7, 5, 18, 0.98);
+      --bg-elevated-soft: rgba(14, 12, 30, 0.95);
+      --text-main: #f9f8ff;
+      --text-muted: #b9bdd9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at 0% 0%, #33234d 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, #423a77 0, transparent 55%),
+        radial-gradient(circle at 50% 90%, #332f4f 0, transparent 60%),
+        var(--bg);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(
+        135deg,
+        rgba(255, 216, 91, 0.12),
+        transparent 40%,
+        rgba(77, 208, 255, 0.12),
+        transparent 70%
+      );
+      mix-blend-mode: soft-light;
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 16px 80px;
+    }
+
+    @media (min-width: 900px) {
+      .page {
+        padding: 32px 24px 96px;
+      }
+    }
+
+    header.hero {
+      position: relative;
+      margin-bottom: 28px;
+      padding: 24px 18px 22px;
+      background: radial-gradient(circle at 0 0, #ffd85b22 0, transparent 55%),
+        radial-gradient(circle at 100% 0, #4dd0ff22 0, transparent 45%),
+        linear-gradient(
+          145deg,
+          rgba(7, 5, 18, 0.96),
+          rgba(15, 13, 32, 0.98)
+        );
+      border-radius: var(--card-radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    @media (min-width: 900px) {
+      header.hero {
+        padding: 26px 28px 22px;
+        margin-bottom: 32px;
+      }
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    @media (max-width: 800px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-kicker {
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin: 0 0 6px;
+      text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-subtitle {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      max-width: 32rem;
+      margin: 0 0 16px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+    }
+
+    .pill span.icon {
+      font-size: 0.92rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out,
+        background 0.15s ease-out, border 0.15s ease-out;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #211605;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.65);
+      background: linear-gradient(
+        135deg,
+        var(--accent-strong),
+        #ffe38b
+      );
+    }
+
+    .btn-ghost {
+      background: rgba(0, 0, 0, 0.35);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      transform: translateY(-1px);
+    }
+
+    .hero-aside {
+      position: relative;
+      padding: 14px 14px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: radial-gradient(circle at 0 0, #ffd85b1f 0, transparent 50%),
+        radial-gradient(circle at 100% 0, #4dd0ff24 0, transparent 55%),
+        linear-gradient(
+          150deg,
+          rgba(8, 6, 18, 0.9),
+          rgba(20, 18, 40, 0.98)
+        );
+      box-shadow: var(--shadow-subtle);
+      overflow: hidden;
+    }
+
+    .hero-aside::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(
+          circle at 18% 0%,
+          rgba(255, 216, 91, 0.18),
+          transparent 55%
+        ),
+        radial-gradient(
+          circle at 80% 85%,
+          rgba(77, 208, 255, 0.14),
+          transparent 55%
+        );
+      mix-blend-mode: screen;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-aside-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tagline {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 8px;
+      color: var(--accent-2);
+    }
+
+    .hero-card-title {
+      font-size: 0.98rem;
+      margin: 0 0 8px;
+    }
+
+    .hero-aside ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-aside ul li {
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-aside code {
+      font-size: 0.78rem;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--accent);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-aside-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.75rem;
+      color: var(--text-faint);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 6px;
+      margin-top: 4px;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.55);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: background 0.15s ease-out, transform 0.1s ease-out;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(0, 0, 0, 0.8);
+      transform: translateY(-0.5px);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 20px;
+      padding: 13px 14px 14px;
+      background: var(--bg-elevated);
+      border-radius: var(--card-radius);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-subtle);
+      backdrop-filter: blur(18px);
+    }
+
+    .sidebar-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--text-faint);
+      margin: 0 0 8px;
+    }
+
+    .sidebar small {
+      display: block;
+      font-size: 0.73rem;
+      color: var(--text-faint);
+      margin-bottom: 9px;
+    }
+
+    .toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.84rem;
+    }
+
+    .toc li {
+      margin-bottom: 3px;
+    }
+
+    .toc a {
+      display: block;
+      padding: 5px 7px;
+      border-radius: 9px;
+      text-decoration: none;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      transition: background 0.15s ease-out, color 0.15s ease-out,
+        border-color 0.15s ease-out, transform 0.08s ease-out;
+    }
+
+    .toc a:hover {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-main);
+      border-color: rgba(255, 255, 255, 0.06);
+      transform: translateX(1px);
+    }
+
+    .toc a.active {
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border-color: rgba(255, 216, 91, 0.6);
+    }
+
+    .toc-nested {
+      list-style: none;
+      margin: 2px 0 4px 10px;
+      padding-left: 4px;
+      border-left: 1px dashed rgba(255, 255, 255, 0.08);
+    }
+
+    .toc-nested li a {
+      font-size: 0.8rem;
+      padding: 4px 7px;
+    }
+
+    main.content {
+      padding: 12px;
+      border-radius: var(--card-radius-lg);
+      background: var(--bg-elevated-soft);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-subtle);
+      backdrop-filter: blur(22px);
+    }
+
+    @media (max-width: 768px) {
+      main.content {
+        padding: 10px;
+      }
+    }
+
+    .section-card {
+      margin-bottom: 18px;
+      padding: 18px 16px 16px;
+      border-radius: 16px;
+      background: radial-gradient(circle at 0 0, #ffffff10 0, transparent 45%),
+        linear-gradient(
+          160deg,
+          rgba(9, 8, 22, 0.98),
+          rgba(16, 15, 32, 0.96)
+        );
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .section-card.accent {
+      border-color: rgba(255, 216, 91, 0.35);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.75);
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .section-header h2 {
+      font-size: 1.1rem;
+      margin: 0;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .section-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-faint);
+    }
+
+    .section-card h3 {
+      font-size: 0.98rem;
+      margin: 10px 0 4px;
+    }
+
+    .section-card h4 {
+      font-size: 0.9rem;
+      margin: 8px 0 3px;
+    }
+
+    p {
+      margin: 0 0 6px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    ul, ol {
+      margin: 0 0 6px 1.1em;
+      padding-left: 0.3em;
+    }
+
+    li {
+      margin-bottom: 3px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .note,
+    .warning,
+    .tip {
+      position: relative;
+      margin: 7px 0 8px;
+      padding: 8px 9px 7px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 0.82rem;
+    }
+
+    .note {
+      background: var(--accent-2-soft);
+      border-color: rgba(77, 208, 255, 0.5);
+    }
+
+    .warning {
+      background: rgba(255, 107, 107, 0.08);
+      border-color: rgba(255, 107, 107, 0.7);
+      color: #ffdede;
+    }
+
+    .tip {
+      background: var(--accent-soft);
+      border-color: rgba(255, 216, 91, 0.6);
+    }
+
+    .note strong,
+    .warning strong,
+    .tip strong {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1px;
+      opacity: 0.85;
+    }
+
+    .inline-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 1px 6px 1px 5px;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.45);
+      color: var(--text-faint);
+    }
+
+    .inline-tag span.icon {
+      font-size: 0.9rem;
+    }
+
+    .checklist {
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+    }
+
+    .checklist li {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .checklist li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    code.inline {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+        Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.8rem;
+      padding: 2px 5px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--accent-2);
+    }
+
+    details {
+      margin: 6px 0 4px;
+      padding: 5px 6px;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    details summary {
+      cursor: pointer;
+      list-style: none;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details[open] {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .summary-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    #backToTop {
+      position: fixed;
+      bottom: 18px;
+      right: 16px;
+      z-index: 50;
+      border: none;
+      border-radius: 999px;
+      padding: 7px 11px;
+      background: rgba(4, 2, 12, 0.9);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 0.15s ease-out, transform 0.15s ease-out,
+        background 0.15s ease-out;
+      backdrop-filter: blur(14px);
+    }
+
+    #backToTop.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    #backToTop:hover {
+      background: rgba(12, 10, 30, 0.96);
+    }
+
+    footer {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--text-faint);
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-kicker">Fallout: New Vegas</div>
+          <h1 class="hero-title">Ultimate One-Run Completionist Guide</h1>
+          <p class="hero-subtitle">
+            A single, Hardcore-friendly walkthrough designed so your female Courier
+            can experience every quest, DLC, achievement, and location in an immersive,
+            story-first order.
+          </p>
+
+          <div class="hero-meta">
+            <span class="pill">
+              <span class="icon">🎮</span>
+              One Playthrough • 100%
+            </span>
+            <span class="pill">
+              <span class="icon">⚙️</span>
+              Hardcore Mode Compatible
+            </span>
+            <span class="pill">
+              <span class="icon">📍</span>
+              All Quests & Locations
+            </span>
+            <span class="pill">
+              <span class="icon">🧠</span>
+              Max Skills & SPECIAL
+            </span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#section-goodsprings" class="btn btn-primary">
+              <span class="icon">▶</span>
+              Start in Goodsprings
+            </a>
+            <a href="#section-dlcs" class="btn btn-ghost">
+              <span class="icon">📦</span>
+              Jump to DLC Strategy
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-aside">
+          <div class="hero-aside-inner">
+            <div class="hero-tagline">Field Notes</div>
+            <h2 class="hero-card-title">How to use this guide while playing</h2>
+            <ul>
+              <li>Follow sections in order for a smooth, immersive route.</li>
+              <li>Whenever you see a location name, mark it on your in-game map.</li>
+              <li>
+                Use <code>☐</code> checklists as you clear areas or quests.
+              </li>
+              <li>Save before big choices; many endings can be sampled via reloads.</li>
+            </ul>
+            <div class="hero-aside-footer">
+              <span>Written for a female Courier.</span>
+              <button class="theme-toggle" id="themeToggle" type="button">
+                <span class="icon">🌗</span>
+                <span>Toggle theme</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Table of contents">
+        <h2 class="sidebar-title">Route Overview</h2>
+        <small>Click any section to jump there. The highlight follows your scroll.</small>
+        <ol class="toc" id="toc">
+          <li><a href="#section-plan">1. Master Plan</a></li>
+          <li><a href="#section-creation">2. Character Creation</a></li>
+          <li>
+            <a href="#section-goodsprings">3. Goodsprings</a>
+            <ol class="toc-nested">
+              <li><a href="#section-doc-house">Doc Mitchell&apos;s House</a></li>
+              <li><a href="#section-goodsprings-town">Town &amp; Cemetery</a></li>
+              <li><a href="#section-goodsprings-battle">Town Defense Choice</a></li>
+            </ol>
+          </li>
+          <li>
+            <a href="#section-primm">4. Primm &amp; NCRCF Loop</a>
+          </li>
+          <li>
+            <a href="#section-novacreppconn">5. Nipton, Novac &amp; Repconn</a>
+          </li>
+          <li>
+            <a href="#section-vegas-approach">6. Approach to New Vegas</a>
+          </li>
+          <li>
+            <a href="#section-strip">7. The Strip &amp; Snow Globes</a>
+          </li>
+          <li>
+            <a href="#section-regions">8. Region Sweeps</a>
+          </li>
+          <li>
+            <a href="#section-companions">9. Companions &amp; Unmarked Quests</a>
+          </li>
+          <li>
+            <a href="#section-skills">10. Maxing Skills &amp; SPECIAL</a>
+          </li>
+          <li>
+            <a href="#section-dlcs">11. DLC Order &amp; Notes</a>
+          </li>
+          <li>
+            <a href="#section-gra">12. Gun Runners&apos; Arsenal</a>
+          </li>
+          <li>
+            <a href="#section-final">13. Final Battle &amp; Endings</a>
+          </li>
+          <li>
+            <a href="#section-immersion">14. Immersive Play Tips</a>
+          </li>
+        </ol>
+      </aside>
+
+      <main class="content">
+        <!-- 1. MASTER PLAN -->
+        <section id="section-plan" class="section-card accent">
+          <div class="section-header">
+            <h2>1. Your One-Run Master Plan</h2>
+            <span class="section-subtitle">One Courier. One save. Everything.</span>
+          </div>
+          <p>
+            You step out into the Mojave sun with a bullet scar in your skull, a Pip-Boy on your arm,
+            and absolutely everything to do. This guide walks you through a single, Hardcore-compatible
+            playthrough where your female Courier:
+          </p>
+          <ul class="checklist">
+            <li>Experiences all main quests, side quests, and DLC questlines.</li>
+            <li>Triggers as many unmarked quests and personal stories as possible.</li>
+            <li>Discovers every location and collects all base-game snow globes.</li>
+            <li>Maxes all skills and pushes SPECIAL as high as the game reasonably allows.</li>
+            <li>Earns every achievement/trophy, including DLC and GRA, in one save.</li>
+          </ul>
+          <p>
+            The walkthrough is written to be kept open while you play. It tells you
+            where to walk, who to talk to, and what to pick up, but avoids heavy plot spoilers.
+          </p>
+          <div class="tip">
+            <strong>Habit</strong>
+            Before you leave any hub (town, Vault, major base), do a slow sweep:
+            talk to every named NPC, check every terminal, and comb through shelves and desks for skill books and snow globes.
+          </div>
+        </section>
+
+        <!-- 2. CHARACTER CREATION -->
+        <section id="section-creation" class="section-card">
+          <div class="section-header">
+            <h2>2. Character Creation &amp; Hardcore Setup</h2>
+            <span class="section-subtitle">Building the perfect female Courier.</span>
+          </div>
+
+          <h3>2.1. Difficulty &amp; Hardcore Mode</h3>
+          <p>
+            When Doc Mitchell asks about Hardcore Mode, choose it <em>on</em> and keep it on
+            for the entire run. You can leave combat difficulty at Normal (or higher if you like),
+            but do not toggle Hardcore off if you want the related achievement.
+          </p>
+
+          <h3>2.2. Starting SPECIAL (Before Implants)</h3>
+          <p>Use this SPECIAL spread in Doc Mitchell&apos;s chair, before any implants:</p>
+          <ul>
+            <li><strong>Strength 5</strong> – Good enough for most weapons; later boosted by DLC perks.</li>
+            <li><strong>Perception 5</strong> – Solid for accuracy and Perception checks.</li>
+            <li><strong>Endurance 7</strong> – Vital for more implants (one per END point + a DT implant).</li>
+            <li><strong>Charisma 1</strong> – Conversation power is in your skills, not this stat.</li>
+            <li><strong>Intelligence 9</strong> – You&apos;ll raise it to 10 immediately via implant.</li>
+            <li><strong>Agility 7</strong> – Great AP and reload speed, helpful for guns and sneaking.</li>
+            <li><strong>Luck 6</strong> – Boosts crit chance and skill points slightly; can be raised by implant.</li>
+          </ul>
+
+          <h3>2.3. Traits for a One-Run Completionist</h3>
+          <ul>
+            <li>
+              <strong>Good Natured</strong> – More points into non-combat skills (Speech, Repair, etc.),
+              which you want for checks and crafting.
+            </li>
+            <li>
+              <strong>Small Frame</strong> – +1 Agility at the cost of more fragile limbs.
+              You&apos;ll stock doctor&apos;s bags anyway, so this is manageable.
+            </li>
+          </ul>
+          <p>
+            If your game version offers the <strong>Skilled</strong> trait, it&apos;s also excellent for
+            a long run: more skills in exchange for slightly slower leveling, which is no problem over 50 levels.
+          </p>
+
+          <h3>2.4. Early Perk Plan (Don&apos;t Improvise These)</h3>
+          <p>Grab these perks at the earliest opportunity:</p>
+          <ul>
+            <li>
+              <strong>Level 2: Black Widow</strong> – Extra damage versus male targets and special dialogue
+              options with several key men in the story.
+            </li>
+            <li>
+              <strong>Level 4: Educated</strong> – +2 skill points per level from now on. This is mandatory
+              for a max-skill run.
+            </li>
+            <li>
+              <strong>Level 6: Comprehension</strong> – Doubles the benefit of skill books and improves magazines.
+            </li>
+          </ul>
+          <p>Other early perks to pick up soon after:</p>
+          <ul>
+            <li>
+              <strong>Cherchez La Femme</strong> – Fits your female Courier and gives bonuses against women
+              plus extra dialogue.
+            </li>
+            <li>
+              Later, mix in combat perks (Guns, Toughness, Better Criticals) and quality-of-life perks
+              (Jury Rigging, Sneak perks) as you like.
+            </li>
+          </ul>
+
+          <h3>2.5. Faction &amp; Ending Strategy</h3>
+          <p>
+            The NCR, Mr. House, Caesar&apos;s Legion, and Yes Man endings are mutually exclusive <em>on a single branch</em>,
+            but you can see them all from one save with careful timing:
+          </p>
+          <ul>
+            <li>
+              Progress each faction&apos;s main questline in parallel, stopping whenever one asks you to
+              directly betray or destroy another major faction.
+            </li>
+            <li>
+              Just before the final Hoover Dam battle, create a special save named something like
+              <code class="inline">Pre-Hoover Dam – Final Choice</code>.
+            </li>
+            <li>
+              Finish the game with one faction, watch the ending, then reload that save and make a different choice.
+            </li>
+          </ul>
+
+          <h3>2.6. DLC Order for Story &amp; Difficulty</h3>
+          <p>Play the four story DLCs in this order, after you&apos;re mid-level but before Hoover Dam:</p>
+          <ol>
+            <li><strong>Dead Money</strong></li>
+            <li><strong>Honest Hearts</strong></li>
+            <li><strong>Old World Blues</strong></li>
+            <li><strong>Lonesome Road</strong></li>
+          </ol>
+          <p>
+            This order makes the narrative references line up and ramps difficulty well, while giving you
+            powerful perks and gear before the final battle.
+          </p>
+        </section>
+
+        <!-- 3. GOODSPRINGS -->
+        <section id="section-goodsprings" class="section-card">
+          <div class="section-header">
+            <h2>3. Goodsprings – Waking Up in the Mojave</h2>
+            <span class="section-subtitle">From Doc&apos;s house to your first snow globe.</span>
+          </div>
+
+          <section id="section-doc-house">
+            <h3>3.1. Doc Mitchell’s House – Wake-up Loot Route</h3>
+            <p>
+              You come to on Doc Mitchell&apos;s couch in Goodsprings. Once you finish character creation,
+              it&apos;s time to quietly strip his house of anything useful.
+            </p>
+            <ol>
+              <li>
+                After you stand up, walk through the house and loot methodically:
+                <ul>
+                  <li>
+                    <strong>Medical room</strong> (where you did the Special test): on shelves and counters,
+                    pick up every <strong>Stimpak</strong>, <strong>RadAway</strong>, <strong>Rad-X</strong>,
+                    <strong>Doctor&apos;s Bag</strong>, and <strong>Med-X</strong>.
+                  </li>
+                  <li>
+                    <strong>Kitchen</strong>: take all food and drink you see – canned goods, clean water,
+                    Sunset Sarsaparilla, and Nuka-Cola. These will keep Hardcore needs manageable early on.
+                  </li>
+                  <li>
+                    <strong>Office/workbench room</strong>: grab <strong>Scrap Metal</strong>,
+                    <strong>Scrap Electronics</strong>, <strong>Wrenches</strong>, <strong>Duct Tape</strong>,
+                    and <strong>Wonderglue</strong>. These are your future
+                    <em>Weapon Repair Kit</em> components.
+                  </li>
+                  <li>
+                    <strong>Bedrooms</strong>: loot dressers and cabinets for clothing, light armor,
+                    caps, and any chems you see.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Accept the gear Doc gives you (9mm pistol, Vault 21 jumpsuit, ammo) and agree to Hardcore Mode.
+              </li>
+              <li>
+                Before leaving, use his sink, fridge, and bed if you want to start fully topped up.
+              </li>
+            </ol>
+          </section>
+
+          <section id="section-goodsprings-town">
+            <h3>3.2. Goodsprings – First Steps into Town</h3>
+            <p>
+              Step outside into the bright Mojave. Turn slightly right and check the mailbox near Doc&apos;s
+              house for any magazines. Then walk down the slope into town.
+            </p>
+            <h4>3.2.1. Meet the Locals in a Loop</h4>
+            <ol>
+              <li>
+                Walk toward the <strong>Prospector Saloon</strong>. Around the back you&apos;ll find
+                <strong>Sunny Smiles</strong> practicing with her dog.
+                Talk to her and agree to do the tutorial:
+                <ul>
+                  <li>Target practice on bottles.</li>
+                  <li>Clearing geckos at nearby wells.</li>
+                </ul>
+                Loot each dead gecko for <strong>meat</strong> (cook it at campfires) and hides.
+              </li>
+              <li>
+                Go inside the <strong>Prospector Saloon</strong>:
+                <ul>
+                  <li>
+                    Talk to <strong>Trudy</strong> about what&apos;s going on in town and why Powder Gangers are a problem.
+                  </li>
+                  <li>
+                    Listen when <strong>Joe Cobb</strong> comes in and threatens her – this sets up the Goodsprings vs. Powder Ganger conflict.
+                  </li>
+                  <li>
+                    Behind the bar and on shelves, look for magazines such as
+                    <em>Programmer&apos;s Digest</em>, <em>Salesman Weekly</em>, and others. Take them all.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Cross the street to <strong>Chet&apos;s General Store</strong>:
+                <ul>
+                  <li>
+                    Talk to Chet, ask about supplies and town defense. This will matter for the upcoming fight.
+                  </li>
+                  <li>
+                    Prioritize buying:
+                    <ul>
+                      <li><strong>Varmint Rifle</strong> (if Sunny didn&apos;t give you one).</li>
+                      <li>A cheap <strong>.357 revolver</strong> if you can afford it.</li>
+                      <li>As many <strong>Stimpaks</strong> and <strong>Doctor&apos;s Bags</strong> as possible.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Outside on the bench near the saloon, speak with <strong>Easy Pete</strong>. Ask about dynamite
+                and about the old mine. This opens up more options for the fight.
+              </li>
+            </ol>
+
+            <div class="note">
+              <strong>Unmarked content</strong>
+              Speak to every named local in Goodsprings and choose all dialogue options:
+              a few tiny unmarked &quot;favors&quot; and flavor stories start here,
+              especially around the saloon and the houses behind it.
+            </div>
+
+            <h3>3.3. Goodsprings Cemetery – First Snow Globe</h3>
+            <ol>
+              <li>
+                From the saloon, face <strong>north</strong> and walk up the dirt road that climbs the hill to
+                the fenced <strong>Goodsprings Cemetery</strong>.
+              </li>
+              <li>
+                On the way up, pick any <strong>Broc Flowers</strong> and <strong>Xander Roots</strong> you see;
+                they are core ingredients for early healing powders.
+              </li>
+              <li>
+                Enter the cemetery gate and walk toward the rows of fresh graves near the center.
+                Look for a small stone base near the graves:
+                sitting on it is the <strong>Goodsprings Snow Globe</strong>. Pick it up.
+              </li>
+              <li>
+                Check the small maintenance shack for <strong>ammo boxes</strong> and a
+                <strong>shovel</strong> (keep the shovel to dig graves and hidden caches later).
+              </li>
+            </ol>
+          </section>
+
+          <section id="section-goodsprings-battle">
+            <h3>3.4. Ghost Town Gunfight – Siding with Goodsprings</h3>
+            <p>
+              You now choose whether to help Goodsprings or the Powder Gangers. For maximum content later,
+              this guide assumes you <strong>help Goodsprings</strong>.
+            </p>
+            <ol>
+              <li>
+                Talk to <strong>Trudy</strong>, <strong>Sunny Smiles</strong>, <strong>Chet</strong>,
+                and <strong>Easy Pete</strong> again:
+                <ul>
+                  <li>
+                    Use <strong>Speech</strong> and <strong>Barter</strong> checks to convince them to help.
+                    If you care about not failing checks, save before each conversation.
+                  </li>
+                  <li>
+                    From Easy Pete, use Speech to convince him to hand over <strong>dynamite</strong>.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Once you&apos;re ready, tell Trudy to start the defense. Move to the main street between
+                the saloon and Chet&apos;s store and get into cover.
+              </li>
+              <li>
+                During the fight:
+                <ul>
+                  <li>Let the townsfolk draw fire where possible.</li>
+                  <li>Pick off Powder Gangers with your rifle or revolver from cover.</li>
+                  <li>
+                    Afterward, loot every Powder Ganger: collect <strong>dynamite</strong>,
+                    <strong>armor</strong>, <strong>ammo</strong>, and chems.
+                  </li>
+                </ul>
+              </li>
+            </ol>
+            <div class="tip">
+              <strong>Immersion</strong>
+              After the shootout, sleep in one of the beds in the rock house opposite the saloon.
+              Treat it as your Courier&apos;s last calm night before heading out alone into the Mojave.
+            </div>
+        </section>
+
+        <!-- 4. PRIMM / NCRCF -->
+        <section id="section-primm" class="section-card">
+          <div class="section-header">
+            <h2>4. Primm, Mojave Outpost &amp; NCRCF Loop</h2>
+            <span class="section-subtitle">First road trip and Powder Ganger web.</span>
+          </div>
+
+          <h3>4.1. Goodsprings → Primm</h3>
+          <ol>
+            <li>
+              From <strong>Chet&apos;s store</strong>, face south-east and follow the cracked asphalt road out of town.
+              Keep to the road, looting plants for food and healing ingredients.
+            </li>
+            <li>
+              As you join the <strong>I-15</strong>, continue south until you see the roller coaster and neon:
+              that&apos;s <strong>Primm</strong>.
+            </li>
+            <li>
+              At the NCR checkpoint just outside, talk to the sergeant to understand the situation
+              and get some NCR context.
+            </li>
+          </ol>
+
+          <h3>4.2. Clearing Primm and Meeting the Sheriff Problem</h3>
+          <ol>
+            <li>
+              Carefully enter Primm – convicts patrol the streets. Use cover on the highway embankments if needed.
+            </li>
+            <li>
+              Go to the <strong>Bison Steve Hotel</strong> (roller coaster attached) and clear it:
+              <ul>
+                <li>
+                  Move room by room, looting convicts for weapons (look for a <strong>9mm SMG</strong>)
+                  and armor.
+                </li>
+                <li>
+                  Check maintenance areas for the <strong>Varmint Rifle night-scope mod</strong> and more ammo.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Head to the <strong>Vikki and Vance Casino</strong>:
+              <ul>
+                <li>
+                  Talk to <strong>Johnson Nash</strong> about your lost package to start the main quest
+                  line that follows the men who shot you.
+                </li>
+                <li>
+                  Ask about the missing sheriff and what it means for the town.
+                </li>
+                <li>
+                  Behind the bar and on shelves, pick up <strong>Sunset Sarsaparilla bottles</strong>
+                  and any <strong>star caps</strong> you see – always take star caps when you find them.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Speak to the <strong>Primmslim</strong> robot in the casino. Look at his sheriff programming
+              options but don&apos;t lock anything in yet.
+            </li>
+          </ol>
+
+          <h3>4.3. Mojave Outpost – NCR Introductions</h3>
+          <ol>
+            <li>
+              Leave Primm southward along the road until you see the giant NCR statues:
+              this is <strong>Mojave Outpost</strong>.
+            </li>
+            <li>
+              Enter the main building with the bar:
+              <ul>
+                <li>
+                  Talk to <strong>Cass</strong> at the bar. Chat with her thoroughly so her future
+                  companion quest flags are set.
+                </li>
+                <li>
+                  Talk to <strong>Ranger Jackson</strong> and accept his quest to clear ants blocking the road.
+                </li>
+                <li>
+                  Check tables and shelves for magazines (Guns, Barter, Repair).
+                </li>
+              </ul>
+            </li>
+            <li>
+              Climb the stairs in the command building to find <strong>Major Knight</strong>:
+              <ul>
+                <li>Ask him to <strong>repair your armor</strong> for free once.</li>
+                <li>
+                  Mention <strong>Primm&apos;s sheriff problem</strong> to open one possible solution
+                  (NCR taking over law enforcement there).
+                </li>
+              </ul>
+            </li>
+            <li>
+              Go outside to the catwalk and speak with <strong>Ranger Ghost</strong> about the lands she&apos;s watching.
+              This will mark more places on your map and foreshadow near-future story points.
+            </li>
+            <li>
+              Complete <strong>Jackson&apos;s ant quest</strong> by following the road south to the marked area,
+              clearing out the ants, and reporting back for XP and NCR reputation.
+            </li>
+          </ol>
+
+          <h3>4.4. NCRCF – Powder Ganger Headquarters</h3>
+          <ol>
+            <li>
+              Fast travel back to <strong>Primm</strong>, then take the road north-east toward the fenced
+              <strong>NCR Correctional Facility</strong> (NCRCF).
+            </li>
+            <li>
+              Holster your weapon and talk your way in at the main gate if you&apos;re not hostile.
+            </li>
+            <li>
+              Inside, your goal is to do Powder Ganger quests before you eventually turn on them:
+              <ul>
+                <li>
+                  Speak with <strong>Eddie</strong> about work. Accept any jobs he offers
+                  (hit jobs, small tasks, etc.).
+                </li>
+                <li>
+                  Talk to other gangers in the cellblocks; some offer additional favors that
+                  function like unmarked quests (errands and deliveries).
+                </li>
+              </ul>
+            </li>
+            <li>
+              Loot carefully: treat the place as &quot;owned&quot; if you want to stay in their good graces for now.
+              Focus on grabbing <strong>dynamite</strong>, <strong>ammo</strong>, and <strong>armor</strong>
+              from corpses or unowned containers.
+            </li>
+            <li>
+              Continue Eddie&apos;s questline until it naturally pauses or until a step would clearly
+              set you on a collision course with the NCR main story. Then leave the gangers alone—
+              you&apos;ll come back on tougher terms later.
+            </li>
+          </ol>
+        </section>
+
+        <!-- 5. NIPTON / NOVAC / REPCCONN -->
+        <section id="section-novacreppconn" class="section-card">
+          <div class="section-header">
+            <h2>5. Nipton, Novac &amp; Repconn Test Site</h2>
+            <span class="section-subtitle">Companions, dark lotteries, and rockets.</span>
+          </div>
+
+          <h3>5.1. Primm → Nipton</h3>
+          <ol>
+            <li>
+              Leave Primm by the eastern bridge and follow the highway into the hills.
+              Loot abandoned cars and small camps along the way for ammo and caps.
+            </li>
+            <li>
+              As you draw closer, you&apos;ll see smoke and fire: that&apos;s <strong>Nipton</strong>.
+              Walk in cautiously.
+            </li>
+            <li>
+              Explore the town:
+              <ul>
+                <li>
+                  <strong>General Store</strong>: caps, ammo, random supplies – grab everything not nailed down.
+                </li>
+                <li>
+                  <strong>Town Hall</strong>: carefully clear enemies inside and check desks,
+                  filing cabinets, and safes for loot and notes.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Go to the town square: talk to the man ranting about winning the lottery,
+              then to the <strong>Legion officer</strong> overseeing the slaughter.
+            </li>
+            <li>
+              Afterward, wander behind Nipton up the hill to any camps:
+              talk to any survivors or gangers there for extra unmarked mini-quests.
+            </li>
+          </ol>
+
+          <h3>5.2. Nipton → Ranger Station Charlie → Novac</h3>
+          <ol>
+            <li>
+              Leave Nipton north along the main road. Off to the right, slightly off the road,
+              step into <strong>Ranger Station Charlie</strong> and talk to whoever is in charge.
+            </li>
+            <li>
+              Take note of the Ranger station status; this will be referenced in future NCR operations.
+            </li>
+            <li>
+              Continue north until the giant <strong>T-Rex billboard and statue</strong> of
+              <strong>Novac</strong> come into view.
+            </li>
+          </ol>
+
+          <h3>5.3. Novac – Home Base &amp; Boone</h3>
+          <ol>
+            <li>
+              Head to the <strong>Dino Dee-lite Motel office</strong>. Speak with <strong>Jeannie May</strong>
+              and rent a room. This will be your early safehouse, with containers you can safely store gear in.
+            </li>
+            <li>
+              Inside your room, loot dressers and tables, then sleep if you want to establish it mentally
+              as your new &quot;home&quot;.
+            </li>
+            <li>
+              Walk to the base of the dinosaur and enter the <strong>Dino Bite Gift Shop</strong>:
+              <ul>
+                <li>
+                  Talk to <strong>Cliff Briscoe</strong>. Buy a <strong>Silenced .22 Pistol</strong>
+                  (handy later for stealth and GRA challenges).
+                </li>
+              </ul>
+            </li>
+            <li>
+              Climb the stairs up into the dinosaur&apos;s mouth at night to meet <strong>Boone</strong>.
+              Talk to him thoroughly about his past and accept his quest,
+              <em>One for My Baby</em>.
+            </li>
+            <li>
+              Investigate the town for betrayal clues:
+              <ul>
+                <li>
+                  Search <strong>Jeannie May&apos;s house</strong> (use Lockpick or obtain her key),
+                  find the safe, and read any incriminating documents inside.
+                </li>
+                <li>
+                  Talk to locals like <strong>Manny Vargas</strong> and others to learn more about Novac&apos;s history.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Once you are satisfied you know the culprit, follow Boone&apos;s instructions:
+              lure the betrayer in front of the dinosaur at night and signal Boone.
+              This resolves his quest and allows him to join you as a companion.
+            </li>
+          </ol>
+
+          <h3>5.4. Novac – Manny &amp; Main Quest</h3>
+          <p>
+            Visit <strong>Manny Vargas</strong> (upstairs in the motel rooms) and talk about your attackers.
+            He will provide the next lead in the main quest, pointing you toward New Vegas via specific routes.
+          </p>
+
+          <h3>5.5. Side Loop – Repconn Test Site &quot;Come Fly With Me&quot;</h3>
+          <ol>
+            <li>
+              From Novac, walk <strong>north-west</strong> across the open ground to the
+              <strong>Repconn Test Site</strong> – a rocket museum with a tower.
+            </li>
+            <li>
+              Clear the outside of feral ghouls carefully, then go inside.
+            </li>
+            <li>
+              In the lobby, talk to the ghoul in charge to begin <em>Come Fly With Me</em>.
+            </li>
+            <li>
+              Work your way through:
+              <ul>
+                <li>
+                  <strong>Office floors</strong> – check desks and small offices for a
+                  <strong>Science</strong> or <strong>Energy Weapons</strong> skill book on shelves
+                  or tables. Pick up every skill book you find, but don&apos;t read them yet
+                  if you don&apos;t have Comprehension.
+                </li>
+                <li>
+                  <strong>Basement/reactor levels</strong> – you&apos;ll meet more ghoul factions
+                  and resolve their conflicts via combat or skill checks.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Complete the rocket quest in whichever way best suits your Courier,
+              using Speech, Science, or brute force as available.
+            </li>
+          </ol>
+
+          <div class="note">
+            <strong>Companions</strong>
+            After finishing Boone&apos;s personal quest, you can recruit him as your first
+            permanent companion. His presence shifts some Legion encounters and opens unique dialogue later.
+          </div>
+        </section>
+
+        <!-- 6. APPROACH TO VEGAS -->
+        <section id="section-vegas-approach" class="section-card">
+          <div class="section-header">
+            <h2>6. Approach to New Vegas</h2>
+            <span class="section-subtitle">188 Trading Post, implants &amp; Freeside.</span>
+          </div>
+
+          <h3>6.1. Novac → 188 Trading Post</h3>
+          <ol>
+            <li>
+              Leave Novac heading <strong>north-west</strong>, keeping to the main roads to avoid
+              Cazador-infested high ground.
+            </li>
+            <li>
+              Eventually you&apos;ll reach an overpass with traders:
+              the <strong>188 Trading Post</strong>.
+            </li>
+            <li>
+              Talk to every merchant and passer-by.
+              Look for <strong>Veronica</strong>, the woman in a Brotherhood of Steel scribe outfit.
+              Speak with her about the Brotherhood and the world until she offers to travel with you.
+            </li>
+          </ol>
+
+          <h3>6.2. 188 → New Vegas Medical Clinic – Implants</h3>
+          <ol>
+            <li>
+              From 188, walk <strong>north-east</strong> to the
+              <strong>New Vegas Medical Clinic</strong>.
+            </li>
+            <li>
+              Inside, talk to <strong>Doctor Usanagi</strong>. Tell her you&apos;re interested in
+              <strong>implants</strong>.
+            </li>
+            <li>
+              Buy implants in this priority order as caps allow:
+              <ul>
+                <li><strong>Intelligence Implant</strong> – to reach 10 INT as soon as possible.</li>
+                <li><strong>Endurance Implant</strong> – more health and more available implant slots.</li>
+                <li><strong>Luck Implant</strong> – for better crits and skill bonuses.</li>
+                <li>Remaining SPECIAL implants in any order that suits your build.</li>
+                <li>
+                  Finally, the <strong>Sub-dermal Armor Implant</strong> (DT bonus) once you have surplus caps.
+                </li>
+              </ul>
+            </li>
+          </ol>
+
+          <h3>6.3. Freeside – Followers, Kings &amp; Second Snow Globe</h3>
+          <ol>
+            <li>
+              From the clinic, head west toward <strong>Freeside</strong> and enter through the
+              <strong>east gate</strong>.
+            </li>
+            <li>
+              Once inside, walk to the <strong>Old Mormon Fort</strong> (Followers of the Apocalypse HQ).
+              Go inside the main tent/building and look on the counters:
+              there is a <strong>Snow Globe</strong> (Freeside/Mormon Fort) sitting there. Pick it up.
+            </li>
+            <li>
+              Talk to <strong>Julie Farkas</strong> and the doctors about chems, addicts, and food/water.
+              Accept any quests or offers to help.
+            </li>
+            <li>
+              Wander the Freeside streets:
+              <ul>
+                <li>
+                  Visit <strong>Mick &amp; Ralph&apos;s</strong> – ask about their &quot;real&quot; inventory
+                  and check for useful gear and magazines.
+                </li>
+                <li>
+                  Head into the <strong>School of Impersonation</strong> and talk to
+                  <strong>The King</strong> to begin the <em>GI Blues</em> questline.
+                </li>
+                <li>
+                  Visit the <strong>Atomic Wrangler</strong> and speak with the Garretts for work.
+                </li>
+                <li>
+                  Talk to <strong>Old Ben</strong> and various Freeside drifters for tiny unmarked favors
+                  and leads.
+                </li>
+              </ul>
+            </li>
+          </ol>
+        </section>
+
+        <!-- 7. THE STRIP -->
+        <section id="section-strip" class="section-card">
+          <div class="section-header">
+            <h2>7. The Strip &amp; Snow Globes</h2>
+            <span class="section-subtitle">Vault 21, Lucky 38 &amp; factions.</span>
+          </div>
+
+          <h3>7.1. Entering the Strip</h3>
+          <ol>
+            <li>
+              Once you have enough caps (or the right skill check to bypass security), head through
+              the <strong>Strip gate</strong>.
+            </li>
+            <li>
+              Take a moment to familiarize yourself with the three main Strip sections.
+            </li>
+          </ol>
+
+          <h3>7.2. Snow Globe – Vault 21 (The Strip)</h3>
+          <ol>
+            <li>
+              Walk along the Strip until you spot the entrance to the
+              <strong>Vault 21 Hotel</strong>.
+            </li>
+            <li>
+              Go in and look at the front reception desk:
+              the <strong>Strip/Vault 21 Snow Globe</strong> rests there. Pick it up.
+            </li>
+          </ol>
+
+          <h3>7.3. Lucky 38 &amp; Snow Globe Turn-Ins</h3>
+          <ol>
+            <li>
+              Shortly after entering, a Securitron will invite you to the <strong>Lucky 38</strong>.
+              Accept and enter.
+            </li>
+            <li>
+              After your first meeting in the penthouse, explore the
+              <strong>cocktail lounge</strong>.
+              Look on the bar counter for another <strong>Snow Globe</strong> (Lucky 38). Take it.
+            </li>
+            <li>
+              Look for the Securitron named <strong>Jane</strong> in the presidential suite.
+              Speak with her about the snow globes and sell them to her for caps when you like.
+              She will display them in a case, but the achievement is already locked in when you collected them.
+            </li>
+          </ol>
+
+          <h3>7.4. Factions on the Strip</h3>
+          <p>
+            On The Strip, you connect with each major endgame faction:
+          </p>
+          <ul>
+            <li><strong>Mr. House</strong> – through further conversations in the Lucky 38.</li>
+            <li><strong>NCR</strong> – via the <strong>NCR Embassy</strong> and Ambassador Crocker.</li>
+            <li><strong>Yes Man</strong> – through an encounter in <strong>The Tops</strong> casino.</li>
+            <li><strong>Caesar&apos;s Legion</strong> – by invitations and later visits to <strong>The Fort</strong>.</li>
+          </ul>
+          <div class="warning">
+            <strong>Important</strong>
+            Progress each faction&apos;s main questline slowly and evenly.
+            Any time you&apos;re asked to destroy or permanently cripple another major faction,
+            stop there and go do other quests first. You&apos;ll pick one path for the final battle only
+            after everything else (and all DLC) is complete.
+          </div>
+        </section>
+
+        <!-- 8. REGION SWEEPS -->
+        <section id="section-regions" class="section-card">
+          <div class="section-header">
+            <h2>8. Region Sweeps – Clearing the Mojave</h2>
+            <span class="section-subtitle">Outer Vegas, south, north &amp; Hoover Dam.</span>
+          </div>
+
+          <p>
+            With the Strip unlocked and your implants started, you can begin systematically clearing
+            the Mojave. Use these loops so you don&apos;t miss quest hubs and locations.
+          </p>
+
+          <h3>8.1. Outer Vegas Loop – McCarran, Aerotech &amp; Vault 3</h3>
+          <ol>
+            <li>
+              From The Strip or Freeside, head south to <strong>Camp McCarran</strong>:
+              <ul>
+                <li>
+                  Enter the main terminal and talk to <strong>Colonel Hsu</strong>,
+                  <strong>Dr. Hildern</strong>, and <strong>Lieutenant Boyd</strong>.
+                  Accept their investigations and vault assignments.
+                </li>
+                <li>
+                  Explore the offices and lab; loot desks for magazines and check private quarters for
+                  unique armor pieces and weapons.
+                </li>
+                <li>
+                  Talk to any named troopers; some quietly ask for help, triggering unmarked or small side quests.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Move east toward <strong>Aerotech Office Park</strong> and
+              <strong>Crimson Caravan Company</strong>:
+              <ul>
+                <li>
+                  At Aerotech, talk to residents and refugees about missing people and debts. Note any leads.
+                </li>
+                <li>
+                  At Crimson Caravan, talk to the company head and staff for caravan-related quests
+                  and to set up future content with Cass.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Head south-west to <strong>Vault 3</strong>, Fiend territory:
+              <ul>
+                <li>
+                  Work with McCarran&apos;s Fiend-related quests if you have them, then infiltrate or storm Vault 3.
+                </li>
+                <li>
+                  Inside, loot every dorm and office. Fiends stockpile chems, ammo, and some rare weapons.
+                </li>
+                <li>
+                  Check overseer and water treatment areas for skill books and unique gear.
+                </li>
+              </ul>
+            </li>
+          </ol>
+
+          <h3>8.2. Southern Loop – Searchlight, Forlorn Hope, Nelson &amp; Cottonwood</h3>
+          <ol>
+            <li>
+              Travel from Novac or The Strip toward <strong>Camp Searchlight</strong>:
+              <ul>
+                <li>
+                  Equip radiation protection (suits, Rad-X, RadAway) before entering the irradiated town.
+                </li>
+                <li>
+                  Talk to NCR at the church and explore ruined houses, looking for <strong>dogtags</strong>,
+                  logs, and supplies.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Continue east to <strong>Camp Forlorn Hope</strong>:
+              <ul>
+                <li>
+                  Speak to every officer; you&apos;ll pick up quests that involve retrieving supplies,
+                  fixing morale, and uncovering corruption.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Move on to <strong>Nelson</strong> and <strong>Cottonwood Cove</strong>:
+              <ul>
+                <li>
+                  Decide how your Courier deals with Legion forces here; there are multiple solutions
+                  for liberating or supporting these locations.
+                </li>
+                <li>
+                  Remember that <strong>Cottonwood Cove</strong> later serves as your ferry to The Fort.
+                </li>
+              </ul>
+            </li>
+          </ol>
+
+          <h3>8.3. Northern Loop – Nellis, Jacobstown, Black Mountain &amp; Vaults</h3>
+          <ol>
+            <li>
+              Head north-east from Vegas to the <strong>Nellis Air Force Base</strong>:
+              <ul>
+                <li>
+                  Sprint between explosions as instructed to survive the artillery field.
+                </li>
+                <li>
+                  Once inside, complete the Boomers&apos; multi-step quest line:
+                  fixing generators, visiting their museum, and more.
+                </li>
+                <li>
+                  In the <strong>Boomer Museum</strong>, check the displays and counters for the
+                  <strong>Nellis Snow Globe</strong> and pick it up.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Travel north-west through frosty terrain to <strong>Jacobstown</strong>:
+              <ul>
+                <li>
+                  Inside the lodge, look at the reception area or front desk to find
+                  the <strong>Jacobstown Snow Globe</strong>.
+                </li>
+                <li>
+                  Talk with <strong>Marcus</strong> and the Nightkin residents for super mutant storylines
+                  and quests (some marked, some not).
+                </li>
+              </ul>
+            </li>
+            <li>
+              Make your way to <strong>Black Mountain</strong>:
+              <ul>
+                <li>
+                  Follow the winding path up and clear the mutant radio outpost.
+                </li>
+                <li>
+                  Search the broadcast building and nearby shacks for unique weapons and a skill book.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Explore the central-northern vaults:
+              <ul>
+                <li>
+                  <strong>Vault 22</strong>: explore hydroponics and labs, reading logs about the plant experiment.
+                </li>
+                <li>
+                  <strong>Vault 11</strong>: carefully explore every level and read terminals to understand
+                  the dark story; there are alternate endings and hidden rooms.
+                </li>
+                <li>
+                  <strong>Vault 34</strong>: a tougher, irradiated vault with powerful weapons but dangerous enemies.
+                </li>
+              </ul>
+            </li>
+          </ol>
+
+          <h3>8.4. Hoover Dam &amp; Visitor Center – Final Base-Game Snow Globe</h3>
+          <ol>
+            <li>
+              As part of NCR or main story progress, visit <strong>Hoover Dam</strong>.
+            </li>
+            <li>
+              Enter the <strong>Hoover Dam Visitor Center</strong>. On a desk in the reception area,
+              locate the <strong>Hoover Dam Snow Globe</strong> and pick it up.
+            </li>
+          </ol>
+          <p>
+            With Goodsprings, Freeside, Strip/Vault 21, Lucky 38, Nellis, Jacobstown, and Hoover Dam globes,
+            you complete the base-game snow globe collection.
+          </p>
+        </section>
+
+        <!-- 9. COMPANIONS -->
+        <section id="section-companions" class="section-card">
+          <div class="section-header">
+            <h2>9. Companions &amp; Unmarked Stories</h2>
+            <span class="section-subtitle">Getting &quot;the whole gang&quot; together.</span>
+          </div>
+
+          <p>
+            For achievements and story flavor, you want to recruit each companion at least once
+            and explore their personal arcs, many of which are technically unmarked.
+          </p>
+
+          <h3>9.1. Companion Locations</h3>
+          <ul>
+            <li><strong>Boone</strong> – In the mouth of the dinosaur in Novac (after his &quot;One for My Baby&quot; quest).</li>
+            <li><strong>Veronica</strong> – Wandering at the <strong>188 Trading Post</strong>.</li>
+            <li><strong>Cass</strong> – Drinking at the bar in the <strong>Mojave Outpost</strong>.</li>
+            <li><strong>Raul</strong> – Imprisoned at <strong>Black Mountain</strong>; free him there.</li>
+            <li><strong>Lily</strong> – In <strong>Jacobstown</strong>, inside the lodge.</li>
+            <li><strong>Arcade Gannon</strong> – At the <strong>Old Mormon Fort</strong> in Freeside.</li>
+            <li><strong>Rex</strong> – The King&apos;s cyber-dog in Freeside.</li>
+            <li><strong>ED-E</strong> – Deactivated eyebot in the back of <strong>Johnson Nash&apos;s store</strong> in Primm.</li>
+          </ul>
+
+          <h3>9.2. Personal &amp; Unmarked Companion Quests</h3>
+          <p>
+            Many companion stories advance by bringing them to specific locations and talking to them
+            after major events:
+          </p>
+          <ul>
+            <li>
+              <strong>Veronica</strong>: Visit Brotherhood-related locations and discuss her views on the order.
+            </li>
+            <li>
+              <strong>Raul</strong>: Bring him to <strong>Black Mountain</strong> and later <strong>Jacobstown</strong>
+              and talk about his identity.
+            </li>
+            <li>
+              <strong>Cass</strong>: Involves <strong>Crimson Caravan</strong> and the <strong>Wrangler</strong>,
+              plus a revenge plot with branching resolutions.
+            </li>
+            <li>
+              <strong>Arcade</strong>: Encourage or discourage his idealism while visiting NCR and science hubs.
+            </li>
+            <li>
+              <strong>Rex</strong>: A quest related to replacing his brain – visit specific clinics and locations,
+              then choose his new brain source.
+            </li>
+          </ul>
+
+          <div class="tip">
+            <strong>Routine</strong>
+            Whenever you finish a significant quest arc or visit a major new location,
+            talk to your active companion. If they have something to say, follow it –
+            that&apos;s usually the next step in their personal story.
+          </div>
+        </section>
+
+        <!-- 10. SKILLS & SPECIAL -->
+        <section id="section-skills" class="section-card">
+          <div class="section-header">
+            <h2>10. Maxing Skills &amp; SPECIAL</h2>
+            <span class="section-subtitle">Implants, books &amp; long-term progression.</span>
+          </div>
+
+          <h3>10.1. When to Read Skill Books</h3>
+          <p>
+            Throughout the Mojave and all DLCs, you&apos;ll find permanent <strong>skill books</strong>.
+            To maximize their value:
+          </p>
+          <ul>
+            <li>
+              Do not read any skill books until you have the <strong>Comprehension</strong> perk
+              (ideally taken at Level 6).
+            </li>
+            <li>
+              After that, each book gives <strong>+4</strong> to a skill instead of +2.
+            </li>
+          </ul>
+          <p>Places to hunt for skill books:</p>
+          <ul>
+            <li>Bookcases in vaults, homes, and offices.</li>
+            <li>Desks and shelves in NCR bases and Strip casinos.</li>
+            <li>Various DLC safes, laboratories, and hidden caches.</li>
+          </ul>
+
+          <h3>10.2. Achieving 100 in All Skills</h3>
+          <p>
+            With 10 Intelligence, the <strong>Educated</strong> and <strong>Comprehension</strong> perks,
+            plus all DLC raising the level cap to 50, you can reach 100 in every skill.
+          </p>
+          <ul>
+            <li>
+              Keep your early level-up points focused on <strong>Speech</strong>, <strong>Repair</strong>,
+              <strong>Guns</strong>, <strong>Lockpick</strong>, and <strong>Science</strong>
+              for checks and utility.
+            </li>
+            <li>
+              As you start reading skill books mid-game, top off under-leveled skills using their +4 bonuses.
+            </li>
+          </ul>
+
+          <h3>10.3. SPECIAL Maxing</h3>
+          <p>To push SPECIAL as high as the game reasonably allows:</p>
+          <ul>
+            <li>
+              Buy all <strong>SPECIAL implants</strong> from <strong>Dr. Usanagi</strong> in the medical clinic,
+              limited by your Endurance.
+            </li>
+            <li>
+              Complete <strong>Old World Blues</strong>; accept all organ upgrades
+              (Spine, Heart, Brain) for permanent stat buffs.
+            </li>
+            <li>
+              Finish <strong>Lonesome Road</strong> and choose the SPECIAL bonus option at the end,
+              adding +1 to the stat that best rounds out your build.
+            </li>
+          </ul>
+
+          <div class="note">
+            <strong>Checklist</strong>
+            <ul class="checklist">
+              <li>Educated taken by Level 4.</li>
+              <li>Comprehension taken by Level 6.</li>
+              <li>All SPECIAL implants purchased.</li>
+              <li>All organ upgrades completed in Old World Blues.</li>
+              <li>Lonesome Road SPECIAL bonus chosen.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 11. DLCS -->
+        <section id="section-dlcs" class="section-card">
+          <div class="section-header">
+            <h2>11. DLCs – Order &amp; Key Priorities</h2>
+            <span class="section-subtitle">Dead Money, Honest Hearts, Old World Blues, Lonesome Road.</span>
+          </div>
+
+          <p>
+            Tackle DLCs after you reach roughly level 20–25 and before the final Hoover Dam battle.
+            This keeps challenge fair and still lets you bring their rewards into the finale.
+          </p>
+
+          <h3>11.1. Dead Money – Sierra Madre</h3>
+          <ul>
+            <li>
+              <strong>How to start:</strong> Listen to the <strong>Sierra Madre broadcast</strong>
+              which appears near the <strong>Mojave Drive-In</strong> in the south-east desert.
+            </li>
+            <li>
+              The DLC strips you of your gear when you arrive, so:
+              <ul>
+                <li>Come with high Sneak, Unarmed/Melee, and plenty of patience.</li>
+                <li>Scavenge everything: chips, food, and stimpaks are scarce but vital.</li>
+              </ul>
+            </li>
+            <li>
+              Collect <strong>Sierra Madre chips</strong> obsessively; there is an achievement tied to
+              amassing them.
+            </li>
+            <li>
+              Explore every villa rooftop and alley for holotapes and codes; many companions&apos; arcs
+              play out through these optional finds.
+            </li>
+            <li>
+              At the vault finale, use manual saves to experience both major ending variations
+              if you want to see all possible outcomes.
+            </li>
+          </ul>
+
+          <h3>11.2. Honest Hearts – Zion</h3>
+          <ul>
+            <li>
+              <strong>How to start:</strong> Travel to the <strong>Northern Passage</strong> north of New Vegas
+              and speak with the caravan there.
+            </li>
+            <li>
+              Once in Zion, clear every side canyon and cave:
+              <ul>
+                <li>Look for <strong>survivalist caches</strong> with powerful loot and journals.</li>
+                <li>Collect new <strong>recipes</strong> and high-Tier survival gear.</li>
+              </ul>
+            </li>
+            <li>
+              The main choice eventually falls between <strong>Daniel</strong> and <strong>Joshua Graham</strong>.
+              Make a manual save before committing so you can see both endings if you wish.
+            </li>
+          </ul>
+
+          <h3>11.3. Old World Blues – Big MT</h3>
+          <ul>
+            <li>
+              <strong>How to start:</strong> Wait for the <strong>Big MT/OWB broadcast</strong> and visit
+              the <strong>Mojave Drive-In</strong> at night.
+            </li>
+            <li>
+              Big MT is a playground for weird science:
+              <ul>
+                <li>
+                  Explore every marked facility – <strong>labs, test chambers, dig sites</strong>.
+                  Many hide skill books, unique energy weapons, and notes.
+                </li>
+                <li>
+                  Progress the main story until you unlock The Sink, your new house.
+                  Activate and upgrade all of its robot appliances for utilities and an achievement.
+                </li>
+              </ul>
+            </li>
+            <li>
+              When offered organ replacements, always choose the upgraded options
+              for permanent bonuses to health, DR, and other stats.
+            </li>
+          </ul>
+
+          <h3>11.4. Lonesome Road – The Divide</h3>
+          <ul>
+            <li>
+              <strong>How to start:</strong> Follow the radio and quest that directs you to the
+              <strong>Canyon Wreckage</strong> near Primm.
+            </li>
+            <li>
+              This DLC is linear and combat-heavy:
+              <ul>
+                <li>Bring your best weapons and armor.</li>
+                <li>Stock ammo, stimpaks, and repair kits.</li>
+              </ul>
+            </li>
+            <li>
+              Keep an eye out for <strong>ED-E logs</strong> and upgrades; finding them all grants an achievement.
+            </li>
+            <li>
+              Look around for <strong>glowing warheads</strong> that you can detonate. There is a challenge
+              for destroying all of them; check side tunnels and dead-ends carefully.
+            </li>
+            <li>
+              At the climax, your choices alter the fate of The Divide and reward you with
+              a <strong>SPECIAL +1</strong> bonus – choose the stat that best balances your build.
+            </li>
+          </ul>
+        </section>
+
+        <!-- 12. GUN RUNNERS ARSENAL -->
+        <section id="section-gra" class="section-card">
+          <div class="section-header">
+            <h2>12. Gun Runners’ Arsenal – Folding Challenges In</h2>
+            <span class="section-subtitle">Challenges without grinding.</span>
+          </div>
+
+          <p>
+            Gun Runners&apos; Arsenal (GRA) adds special weapon challenges. You only need a subset
+            of them for the achievements, so weave the easiest ones into your normal play.
+          </p>
+
+          <h3>12.1. General Tips</h3>
+          <ul>
+            <li>
+              Frequently check <strong>Data → Misc → Challenges</strong> on your Pip-Boy, especially
+              the GRA tab.
+            </li>
+            <li>
+              When you can, buy <strong>GRA-marked versions</strong> of common weapons and use them
+              instead of the vanilla counterparts to rack up damage for the &quot;10,000 damage&quot; achievements.
+            </li>
+          </ul>
+
+          <h3>12.2. Easy One-Star Challenges</h3>
+          <p>Pick three of these to clear the one-star requirement:</p>
+          <ul>
+            <li>
+              <strong>A Slave Obeys</strong> – If you choose not to side with Mr. House,
+              kill him using a <strong>9 Iron</strong> or <strong>Nephi&apos;s Golf Driver</strong>.
+              Remember to bring the club before meeting him in his control room.
+            </li>
+            <li>
+              <strong>Ne Ne Ne Ne…</strong> – Cripple five enemies&apos; right arms with any shotgun.
+              Use VATS and target the right arm on lightly armored enemies.
+            </li>
+            <li>
+              <strong>Overkill</strong> – Kill a dog or coyote with a <strong>Fat Man</strong> or Fat Mine.
+              Lure a weak target somewhere safe and fire a mini-nuke.
+            </li>
+          </ul>
+
+          <h3>12.3. Two- and Three-Star Example Challenges</h3>
+          <p>Good candidates that align with normal combat:</p>
+          <ul>
+            <li>
+              <strong>White Line Nightmare</strong> – Kill Fiends, Vipers, and Jackals with specific weapons.
+              Focus on this when clearing Fiend territories like around Vault 3.
+            </li>
+            <li>
+              <strong>Vault 13&apos;s Revenge</strong> – Kill super mutants with specified weapon types.
+              Target Black Mountain and areas around Jacobstown while this is active.
+            </li>
+            <li>
+              <strong>Against All Tyrants</strong> (3-star) – Kill named Legion members with certain weapons.
+              Save it for late game if you decide to oppose the Legion.
+            </li>
+            <li>
+              Other combat-focused challenges like <strong>Deathclaw Pro Hunter</strong> or
+              <strong>Man-Machine Interface</strong>, depending on which enemies you are already fighting often.
+            </li>
+          </ul>
+
+          <h3>12.4. Damage Achievements</h3>
+          <ul>
+            <li>
+              <strong>GRA Damage with Unique Weapons</strong> – Pick a favorite unique gun or melee weapon
+              and use it for most mid-late fights.
+            </li>
+            <li>
+              <strong>GRA Damage with GRA Weapons</strong> – Similarly, once you purchase GRA guns,
+              prioritize them over vanilla versions until the damage challenge completes.
+            </li>
+          </ul>
+        </section>
+
+        <!-- 13. FINAL BATTLE -->
+        <section id="section-final" class="section-card">
+          <div class="section-header">
+            <h2>13. Final Main Quest Push &amp; Multi-Ending Strategy</h2>
+            <span class="section-subtitle">One save, all endgames.</span>
+          </div>
+
+          <h3>13.1. Before Hoover Dam</h3>
+          <p>Before committing to the final battle, ensure you have:</p>
+          <ul class="checklist">
+            <li>Completed all side quests you care about (check Pip-Boy quest list).</li>
+            <li>Finished all four story DLCs.</li>
+            <li>Collected all base-game snow globes and turned them in if you want caps.</li>
+            <li>Discovered at least 125 locations (base game + DLCs).</li>
+            <li>Maxed or nearly maxed all skills, and purchased all desired implants.</li>
+          </ul>
+
+          <h3>13.2. Creating Your &quot;Master Save&quot;</h3>
+          <ol>
+            <li>
+              Progress the main story with the faction you lean toward, up until the point where the game
+              clearly warns you that you&apos;re committing to a final path at Hoover Dam.
+            </li>
+            <li>
+              Create a new, clearly labeled hard save here, such as:
+              <code class="inline">Pre-Hoover Dam – Final Choice</code>.
+            </li>
+            <li>
+              This save is your gateway to all main-ending achievements.
+            </li>
+          </ol>
+
+          <h3>13.3. Running Through Each Ending</h3>
+          <ol>
+            <li>
+              From your master save, choose one faction (e.g., <strong>NCR</strong>) and proceed
+              through the final missions to victory. Watch the ending slides and credits.
+            </li>
+            <li>
+              Once you&apos;ve returned to the main menu, reload the master save and align with
+              a different faction (e.g., <strong>Mr. House</strong> or <strong>Yes Man</strong>),
+              making different choices at the key moments.
+            </li>
+            <li>
+              Repeat this process for all factions whose endings you want to see and whose achievements
+              you still need.
+            </li>
+          </ol>
+
+          <div class="note">
+            <strong>Hardcore Mode</strong>
+            As long as you never disabled Hardcore Mode during this save and reached the credits once,
+            the Hardcore achievement is safe. You don&apos;t need to re-run the whole story again.
+          </div>
+        </section>
+
+        <!-- 14. IMMERSIVE TIPS -->
+        <section id="section-immersion" class="section-card">
+          <div class="section-header">
+            <h2>14. Immersive Playstyle Tips</h2>
+            <span class="section-subtitle">Staying in character while seeing everything.</span>
+          </div>
+
+          <h3>14.1. Conversation First</h3>
+          <ul>
+            <li>
+              Talk to every named NPC fully and exhaust peaceful dialogue options
+              before pulling a trigger.
+            </li>
+            <li>
+              Always ask &quot;Tell me about this place&quot; and &quot;Any work available?&quot; –
+              many side and unmarked quests hide behind those lines.
+            </li>
+          </ul>
+
+          <h3>14.2. Reading the World</h3>
+          <ul>
+            <li>
+              Read every <strong>note, holotape, and terminal</strong> you find.
+              Many unmarked objectives and stash hints only live in text.
+            </li>
+            <li>
+              When characters mention places or people, mark them mentally or on paper
+              if you don&apos;t yet have a map marker.
+            </li>
+          </ul>
+
+          <h3>14.3. Checking Items as You Go</h3>
+          <p>As a quick mental checklist when you enter any new interior location:</p>
+          <ul class="checklist">
+            <li>Walk the perimeter and note any closed doors and locked containers.</li>
+            <li>Check every bookshelf for skill books.</li>
+            <li>Check bar counters, desks, and reception areas for snow globes or unique items.</li>
+            <li>Look for owned vs unowned containers if you&apos;re minding faction reputation.</li>
+          </ul>
+
+          <h3>14.4. Saving Smart</h3>
+          <ul>
+            <li>
+              Keep at least three rolling manual saves:
+              one recent, one from earlier in the current questline, and one &quot;clean&quot; save from before
+              major faction choices.
+            </li>
+            <li>
+              Save before big Speech checks, robberies, or any event that feels like
+              it might have long-term consequences for factions or companions.
+            </li>
+          </ul>
+
+          <h3>14.5. Walking the Roads</h3>
+          <p>
+            When the guide tells you to head somewhere, try actually walking there along the roads instead
+            of fast traveling the first time. You&apos;ll:
+          </p>
+          <ul>
+            <li>Discover more map locations.</li>
+            <li>Encounter random events and traveling NPCs with tiny stories.</li>
+            <li>Make the Mojave feel like a single connected space instead of a menu of fast travel points.</li>
+          </ul>
+        </section>
+
+        <footer>
+          Use this page as your wasteland field manual: follow the route, mark off checklists, and
+          let your Courier make the final calls when choices appear.
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <button id="backToTop" type="button" aria-label="Back to top">
+    <span>↑</span>
+    <span>Back to top</span>
+  </button>
+
+  <script>
+    (function () {
+      // Smooth scrolling for internal links
+      document.addEventListener("click", function (e) {
+        const target = e.target.closest('a[href^="#"]');
+        if (!target) return;
+        const href = target.getAttribute("href");
+        if (href === "#" || href.length === 1) return;
+        const el = document.querySelector(href);
+        if (el) {
+          e.preventDefault();
+          const top = el.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      });
+
+      // Scrollspy for TOC
+      const sections = document.querySelectorAll("section[id]");
+      const tocLinks = document.querySelectorAll("#toc a");
+      const linkMap = {};
+      tocLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) {
+          linkMap[href.slice(1)] = link;
+        }
+      });
+
+      function onScroll() {
+        let currentId = null;
+        const scrollPos = window.scrollY + 140;
+
+        sections.forEach((sec) => {
+          const rect = sec.getBoundingClientRect();
+          const top = rect.top + window.scrollY;
+          if (top <= scrollPos) {
+            currentId = sec.id;
+          }
+        });
+
+        if (currentId) {
+          tocLinks.forEach((l) => l.classList.remove("active"));
+          const active = linkMap[currentId];
+          if (active) active.classList.add("active");
+        }
+      }
+
+      document.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+
+      // Back-to-top button
+      const backToTop = document.getElementById("backToTop");
+      function toggleBackToTop() {
+        if (window.scrollY > 350) {
+          backToTop.classList.add("visible");
+        } else {
+          backToTop.classList.remove("visible");
+        }
+      }
+      document.addEventListener("scroll", toggleBackToTop, { passive: true });
+      toggleBackToTop();
+
+      backToTop.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Theme toggle
+      const themeToggle = document.getElementById("themeToggle");
+      const body = document.body;
+      const storageKey = "fnv-guide-theme";
+
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          body.classList.add("dark-theme");
+        } else {
+          body.classList.remove("dark-theme");
+        }
+      }
+
+      // Init theme from localStorage / media query
+      let savedTheme = localStorage.getItem(storageKey);
+      if (!savedTheme) {
+        savedTheme = window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      }
+      applyTheme(savedTheme);
+
+      if (themeToggle) {
+        themeToggle.addEventListener("click", function () {
+          const current =
+            body.classList.contains("dark-theme") ? "dark" : "light";
+          const next = current === "dark" ? "light" : "dark";
+          applyTheme(next);
+          localStorage.setItem(storageKey, next);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
